@@ -1,0 +1,7 @@
+
+# Ignore IntelliJ logs and cache
+.cache/
+
+# Ignore MySQL volume data
+volume-data/
+
