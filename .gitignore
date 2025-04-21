@@ -5,3 +5,7 @@
 # Ignore MySQL volume data
 volume-data/
 
+
+# Ignore Chrome profiles and cache
+.config/google-chrome/
+
