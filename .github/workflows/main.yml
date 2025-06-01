@@ -33,11 +33,15 @@ jobs:
       run: |
         export DJANGO_SETTINGS_MODULE=savannah_ecommerce.settings
         python manage.py migrate
+      env:
+        DATABASE_URL: sqlite:///db.sqlite3
 
     - name: Run Tests
       run: |
         export DJANGO_SETTINGS_MODULE=savannah_ecommerce.settings
         coverage run --source='.' manage.py test
+      env:
+        DATABASE_URL: sqlite:///db.sqlite3
 
     - name: Generate Coverage Report
       run: |
