@@ -44,6 +44,12 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
+        startupProbe:
+          httpGet:
+            path: /health/
+            port: 8000
+          failureThreshold: 30
+          periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /health/

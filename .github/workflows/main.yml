@@ -159,13 +159,33 @@ jobs:
         echo "Deployment status:"
         kubectl describe deployment savannah-ecommerce -n savannah
         
-        # Show pod status
+        # Show pod status and logs
         echo "Pod status:"
         kubectl get pods -n savannah
-        kubectl describe pods -n savannah -l app=savannah-ecommerce
+        POD_NAME=$(kubectl get pods -n savannah -l app=savannah-ecommerce -o jsonpath="{.items[0].metadata.name}")
+        if [ ! -z "$POD_NAME" ]; then
+          echo "Pod logs:"
+          kubectl logs -n savannah $POD_NAME
+          echo "Pod description:"
+          kubectl describe pod -n savannah $POD_NAME
+        else
+          echo "No pods found for the deployment"
+        fi
+
+        # Show minikube status
+        echo "Minikube status:"
+        minikube status
 
     - name: Get Service URL
       run: |
         echo "Getting service URL..."
+        # Wait for pods to be ready
+        echo "Waiting for pods to be ready..."
+        kubectl wait --namespace savannah \
+          --for=condition=ready \
+          --timeout=300s \
+          pod -l app=savannah-ecommerce || true
+        
+        # Get service URL
         minikube service savannah-ecommerce -n savannah --url
         echo "To access the application, run: minikube service savannah-ecommerce -n savannah"
