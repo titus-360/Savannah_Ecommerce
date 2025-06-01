@@ -33,7 +33,7 @@ jobs:
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_HOST: localhost
-      DB_PORT: 5433
+      DB_PORT: 5432
       DJANGO_SETTINGS_MODULE: savannah_ecommerce.ci_settings
       DEBUG: False
 
@@ -50,8 +50,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        # Install tools for linting, formatting, coverage, security, and static analysis
-        pip install flake8 black coverage pip-audit bandit dj-database-url
 
     - name: Run Migrations
       run: |
