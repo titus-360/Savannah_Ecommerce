@@ -36,6 +36,10 @@ jobs:
       env:
         DB_ENGINE: django.db.backends.sqlite3
         DB_NAME: db.sqlite3
+        DB_USER: ''
+        DB_PASSWORD: ''
+        DB_HOST: ''
+        DB_PORT: ''
         DEBUG: False
 
     - name: Run Tests
@@ -45,6 +49,10 @@ jobs:
       env:
         DB_ENGINE: django.db.backends.sqlite3
         DB_NAME: db.sqlite3
+        DB_USER: ''
+        DB_PASSWORD: ''
+        DB_HOST: ''
+        DB_PORT: ''
         DEBUG: False
 
     - name: Generate Coverage Report
