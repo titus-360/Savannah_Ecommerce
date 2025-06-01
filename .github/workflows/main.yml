@@ -117,22 +117,22 @@ jobs:
     - name: Set up minikube
       uses: medyagh/setup-minikube@master
 
-    - name: Configure GitHub Container Registry Authentication
+    - name: Deploy to Kubernetes
       run: |
-        # Create a Kubernetes secret for GitHub Container Registry
+        # Create namespace first
+        kubectl create namespace savannah --dry-run=client -o yaml | kubectl apply -f -
+        
+        # Wait for namespace to be ready
+        kubectl wait --for=condition=ready namespace/savannah --timeout=30s || true
+        
+        # Create secrets after namespace exists
         kubectl create secret docker-registry ghcr-auth \
           --docker-server=ghcr.io \
           --docker-username=${{ github.actor }} \
           --docker-password=${{ secrets.GITHUB_TOKEN }} \
           --namespace=savannah \
           --dry-run=client -o yaml | kubectl apply -f -
-
-    - name: Deploy to Kubernetes
-      run: |
-        # Create namespace if it doesn't exist
-        kubectl create namespace savannah --dry-run=client -o yaml | kubectl apply -f -
         
-        # Create secret for database password
         kubectl create secret generic db-secrets \
           --namespace savannah \
           --from-literal=password=postgres \
