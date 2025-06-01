@@ -18,35 +18,40 @@ import logging
 # Initialize logging
 logger = logging.getLogger(__name__)
 
-# Initialize Africa's Talking
-try:
-    username = settings.AFRICAS_TALKING_USERNAME
-    api_key = settings.AFRICAS_TALKING_API_KEY
-    
-    # Log initialization attempt
-    logger.info("Attempting to initialize Africa's Talking...")
-    logger.info(f"Username: {username}")
-    logger.info(f"API Key length: {len(api_key) if api_key else 0} characters")
-    
-    # Initialize with sandbox credentials
-    africastalking.initialize(username, api_key)
-    sms = africastalking.SMS
-    logger.info("Successfully initialized Africa's Talking")
-    
-    # No need to test sending here, let's rely on the actual send later
-    # try:
-    #     # Try to get account info to verify credentials
-    #     response = sms.send("Test message", ["+254700000000"])
-    #     logger.info("Successfully initialized Africa's Talking and verified credentials")
-    # except Exception as test_error:
-    #     logger.error(f"Failed to verify Africa's Talking credentials: {str(test_error)}")
-    #     sms = None
-    #     raise
+# Check if settings are configured (should be True in production, False in minimal CI settings)
+if settings.configured:
+    try:
+        username = settings.AFRICAS_TALKING_USERNAME
+        api_key = settings.AFRICAS_TALKING_API_KEY
         
-except Exception as e:
-    logger.error(f"Failed to initialize Africa's Talking: {str(e)}")
-    logger.error("Please check your AT_USERNAME and AT_API_KEY in .env file")
+        # Log initialization attempt
+        logger.info("Attempting to initialize Africa's Talking...")
+        logger.info(f"Username: {username}")
+        logger.info(f"API Key length: {len(api_key) if api_key else 0} characters")
+        
+        # Initialize with sandbox credentials
+        africastalking.initialize(username, api_key)
+        sms = africastalking.SMS
+        logger.info("Successfully initialized Africa's Talking")
+        
+        # No need to test sending here, let's rely on the actual send later
+        # try:
+        #     # Try to get account info to verify credentials
+        #     response = sms.send("Test message", ["+254700000000"])
+        #     logger.info("Successfully initialized Africa's Talking and verified credentials")
+        # except Exception as test_error:
+        #     logger.error(f"Failed to verify Africa's Talking credentials: {str(test_error)}")
+        #     sms = None
+        #     raise
+        
+    except Exception as e:
+        logger.error(f"Failed to initialize Africa's Talking: {str(e)}")
+        logger.error("Please check your AT_USERNAME and AT_API_KEY in .env file")
+        sms = None
+else:
+    # If settings are not configured (like in minimal CI), set sms to None
     sms = None
+    logger.warning("Africa's Talking initialization skipped: Settings not configured.")
 
 # Initialize Twilio
 # try:

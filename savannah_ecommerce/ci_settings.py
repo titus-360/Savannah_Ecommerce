@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django_coverage_plugin',
     'mptt',
     'social_django',
+    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
