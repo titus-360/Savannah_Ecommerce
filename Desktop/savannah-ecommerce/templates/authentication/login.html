@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<style>
+    .login-container {
+        max-width: 400px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .login-header {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .login-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+    }
+
+    .login-subtitle {
+        color: #666;
+        font-size: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-dark);
+        font-weight: 500;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+        border-color: var(--accent-color);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 153, 0, 0.1);
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 0.75rem;
+        background: var(--accent-color);
+        color: var(--text-dark);
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .btn-login:hover {
+        background: #f3a847;
+    }
+
+    .login-footer {
+        margin-top: 1.5rem;
+        text-align: center;
+        color: #666;
+    }
+
+    .login-footer a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .login-footer a:hover {
+        text-decoration: underline;
+    }
+
+    .social-login {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .social-login-title {
+        color: #666;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    .social-login-title::before,
+    .social-login-title::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 30%;
+        height: 1px;
+        background: var(--border-color);
+    }
+
+    .social-login-title::before {
+        left: 0;
+    }
+
+    .social-login-title::after {
+        right: 0;
+    }
+
+    .social-login-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .social-login-btn:hover {
+        background: #f8f9fa;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .social-login-btn img {
+        width: 18px;
+        height: 18px;
+        margin-right: 0.75rem;
+    }
+
+    .social-login-btn span {
+        font-size: 0.95rem;
+    }
+
+    .alert {
+        padding: 1rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-header">
+        <h1 class="login-title">Welcome Back</h1>
+        <p class="login-subtitle">Please sign in to continue</p>
+    </div>
+
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            Your username and password didn't match. Please try again.
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="form-label" for="id_username">Username</label>
+            <input type="text" name="username" id="id_username" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="id_password">Password</label>
+            <input type="password" name="password" id="id_password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn-login">Sign In</button>
+    </form>
+
+    <div class="login-footer">
+        <p>Don't have an account? <a href="{% url 'authentication:register' %}">Register</a></p>
+        <p><a href="{% url 'authentication:password_reset' %}">Forgot your password?</a></p>
+    </div>
+
+    <div class="social-login">
+        <p class="social-login-title">Or continue with</p>
+        <a href="{% url 'social:begin' 'google-oauth2' %}" class="social-login-btn">
+            <img src="https://www.google.com/favicon.ico" alt="Google logo">
+            <span>Sign in with Google</span>
+        </a>
+    </div>
+</div>
+{% endblock %} 

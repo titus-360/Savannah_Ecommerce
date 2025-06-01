@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Authentication Error - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Authentication Error</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <p>{{ message }}</p>
+                        {% if error == 'AuthAlreadyAssociated' %}
+                        <hr>
+                        <p class="mb-0">What you can do:</p>
+                        <ul>
+                            <li>Try signing in with a different Google account</li>
+                            <li>If you believe this is an error, please contact support</li>
+                            <li>You can also try signing in with your email and password</li>
+                        </ul>
+                        {% elif error == 'AuthForbidden' %}
+                        <hr>
+                        <p class="mb-0">What you can do:</p>
+                        <ul>
+                            <li>Make sure you've granted all necessary permissions</li>
+                            <li>Try signing in again</li>
+                            <li>If the problem persists, contact support</li>
+                        </ul>
+                        {% elif error == 'AuthTokenError' or error == 'AuthStateMissing' %}
+                        <hr>
+                        <p class="mb-0">What you can do:</p>
+                        <ul>
+                            <li>Clear your browser cookies and cache</li>
+                            <li>Try signing in again</li>
+                            <li>If the problem persists, try using a different browser</li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'authentication:login' %}" class="btn btn-primary">Back to Login</a>
+                        {% if error == 'AuthAlreadyAssociated' %}
+                        <a href="{% url 'authentication:password_reset' %}" class="btn btn-link">Forgot Password?</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
