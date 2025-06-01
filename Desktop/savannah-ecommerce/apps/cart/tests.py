@@ -90,7 +90,7 @@ class CartViewTests(TestCase):
         response = self.client.get(reverse('cart:cart_count'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()['count'], 0)
-        
+
         self.cart.add_item(self.product, 3)
         response = self.client.get(reverse('cart:cart_count'))
         self.assertEqual(response.status_code, 200)
@@ -118,7 +118,7 @@ class CartViewTests(TestCase):
         self.assertEqual(response.status_code, 302) # Redirects to cart detail
         self.assertRedirects(response, reverse('cart:cart_detail'))
         self.assertEqual(self.cart.items.count(), 0)
-        
+
     def test_checkout_view_empty_cart(self):
         response = self.client.get(reverse('cart:checkout'))
         self.assertEqual(response.status_code, 302) # Redirects due to empty cart
@@ -126,10 +126,9 @@ class CartViewTests(TestCase):
         messages_list = list(response.wsgi_request._messages)
         self.assertEqual(len(messages_list), 1)
         self.assertEqual(str(messages_list[0]), 'Your cart is empty')
-        
+
     # Note: Testing the successful checkout process requires mocking external calls (notifications) or disabling them in tests.
     # We can add a basic successful checkout test later if needed, but mocking is generally preferred for unit/integration tests.
-
 
 class CartSerializerTests(TestCase):
     def setUp(self):
@@ -148,7 +147,6 @@ class CartSerializerTests(TestCase):
         self.assertEqual(data['items'][0]['quantity'], 2)
         self.assertEqual(Decimal(data['items'][0]['subtotal']), Decimal('2400.00'))
         self.assertEqual(Decimal(data['total_price']), Decimal('2400.00'))
-
 
 from rest_framework import status
 from unittest.mock import patch

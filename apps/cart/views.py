@@ -104,17 +104,17 @@ class CartViewSet(viewsets.ModelViewSet):
     def checkout(self, request, pk=None):
         """Create an order from the cart"""
         cart = self.get_object()
-        
+
         if not cart.items.exists():
             return Response(
                 {'error': 'Your cart is empty'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-            
+
         try:
             # Create order using the create_order_from_cart method
             order = Order.create_order_from_cart(cart)
-            
+
             # Optionally send notifications (consider moving to a background task in production)
             try:
                 from apps.orders.views import send_order_notifications
@@ -123,12 +123,12 @@ class CartViewSet(viewsets.ModelViewSet):
             except Exception as e:
                 logger.error(f"Failed to send notifications for order {order.order_number}: {str(e)}")
                 logger.exception("Full traceback:")
-                
+
             # Return the created order details
             from apps.orders.serializers import OrderSerializer
             serializer = OrderSerializer(order)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
+
         except Exception as e:
             logger.error(f"Error during checkout: {str(e)}")
             logger.exception("Full traceback:")
@@ -157,7 +157,7 @@ def update_cart_item(request, item_id):
     """Update the quantity of a cart item"""
     cart = get_object_or_404(Cart, user=request.user)
     cart_item = get_object_or_404(CartItem, id=item_id, cart=cart)
-    
+
     if request.method == 'POST':
         quantity = int(request.POST.get('quantity', 1))
         if quantity > 0:
@@ -165,7 +165,7 @@ def update_cart_item(request, item_id):
             cart_item.save()
         else:
             cart_item.delete()
-    
+
     return redirect('cart:cart_detail')
 
 @login_required
@@ -183,11 +183,11 @@ def add_to_cart(request, product_id):
     cart, created = Cart.objects.get_or_create(user=request.user)
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
-    
+
     if quantity <= 0:
         messages.error(request, 'Quantity must be greater than 0')
         return redirect('products:detail', pk=product_id)
-    
+
     cart_item = cart.add_item(product, quantity)
     messages.success(request, f'{product.name} added to cart!')
     return redirect('cart:cart_detail')
@@ -196,14 +196,14 @@ def add_to_cart(request, product_id):
 def checkout(request):
     """Handle the checkout process"""
     cart = get_object_or_404(Cart, user=request.user)
-    
+
     if not cart.items.exists():
         messages.error(request, 'Your cart is empty')
         return redirect('cart:cart_detail')
-    
+
     # Create order using the create_order_from_cart method
     order = Order.create_order_from_cart(cart)
-    
+
     # Send notifications
     try:
         from apps.orders.views import send_order_notifications
@@ -212,6 +212,6 @@ def checkout(request):
     except Exception as e:
         logger.error(f"Failed to send notifications for order {order.order_number}: {str(e)}")
         logger.exception("Full traceback:")
-    
+
     messages.success(request, 'Order placed successfully!')
-    return redirect('orders:order_detail', pk=order.pk) 
+    return redirect('orders:order_detail', pk=order.pk)

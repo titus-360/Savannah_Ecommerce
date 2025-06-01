@@ -45,7 +45,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 def product_list(request):
     products = Product.objects.all()
     categories = Category.objects.all()
-    
+
     # Search functionality
     search_query = request.GET.get('search', '')
     if search_query:
@@ -53,12 +53,12 @@ def product_list(request):
             Q(name__icontains=search_query) |
             Q(description__icontains=search_query)
         )
-    
+
     # Category filter
     category_id = request.GET.get('category')
     if category_id:
         products = products.filter(category_id=category_id)
-    
+
     # Price range filter
     min_price = request.GET.get('min_price')
     max_price = request.GET.get('max_price')
@@ -66,7 +66,7 @@ def product_list(request):
         products = products.filter(price__gte=min_price)
     if max_price:
         products = products.filter(price__lte=max_price)
-    
+
     # Sorting
     sort = request.GET.get('sort', '')
     if sort == 'price_asc':
@@ -77,7 +77,7 @@ def product_list(request):
         products = products.order_by('-created_at')
     elif sort == 'popular':
         products = products.order_by('-views')
-    
+
     context = {
         'products': products,
         'categories': categories,
@@ -85,7 +85,7 @@ def product_list(request):
         'current_sort': sort,
         'search_query': search_query,
     }
-    
+
     return render(request, 'products/list.html', context)
 
 def product_create(request):
@@ -104,12 +104,12 @@ def product_detail(request, pk):
     # Increment view count
     product.views += 1
     product.save()
-    
+
     # Get related products from the same category
     related_products = Product.objects.filter(
         category=product.category
     ).exclude(pk=pk)[:4]
-    
+
     context = {
         'product': product,
         'related_products': related_products,

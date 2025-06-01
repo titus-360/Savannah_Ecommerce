@@ -2517,3 +2517,49 @@ WARNING 2025-06-01 18:29:38,536 log 268766 132175907923392 Unauthorized: /api/cu
 WARNING 2025-06-01 18:29:39,523 log 268766 132175907923392 Not Found: /api/customers/12/
 WARNING 2025-06-01 18:29:42,163 log 268766 132175907923392 Not Found: /api/orders/3/
 WARNING 2025-06-01 18:29:47,369 log 268766 132175907923392 Not Found: /orders/9/
+INFO 2025-06-01 18:31:30,349 views 264951 135561817880256 Starting to send notifications for order ORD-20250601153130
+INFO 2025-06-01 18:31:30,350 views 264951 135561817880256 Preparing customer email for murithi.titus.mb2@gmail.com
+INFO 2025-06-01 18:31:30,380 views 264951 135561817880256 Sending customer email to murithi.titus.mb2@gmail.com
+INFO 2025-06-01 18:31:33,357 views 264951 135561817880256 Successfully sent confirmation email to murithi.titus.mb2@gmail.com
+INFO 2025-06-01 18:31:33,358 views 264951 135561817880256 Preparing admin email for admin@savannah.com
+INFO 2025-06-01 18:31:33,414 views 264951 135561817880256 Sending admin email to admin@savannah.com
+WARNING 2025-06-01 18:31:34,090 log 264951 135561809487552 Not Found: /cart/remove/29/
+WARNING 2025-06-01 18:31:34,090 basehttp 264951 135561809487552 "GET /cart/remove/29/ HTTP/1.1" 404 8206
+INFO 2025-06-01 18:31:37,330 views 264951 135561817880256 Successfully sent admin notification email to admin@savannah.com
+INFO 2025-06-01 18:31:37,330 views 264951 135561817880256 Using sandbox test number for SMS
+INFO 2025-06-01 18:31:37,330 views 264951 135561817880256 Sending SMS to +254700000000
+ERROR 2025-06-01 18:31:37,944 views 264951 135561817880256 Failed to send SMS: The supplied authentication is invalid
+INFO 2025-06-01 18:31:37,954 views 264951 135561817880256 Successfully sent notifications for order ORD-20250601153130
+INFO 2025-06-01 18:31:38,890 basehttp 264951 135561809487552 "GET / HTTP/1.1" 200 15861
+INFO 2025-06-01 18:31:38,950 basehttp 264951 135561809487552 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-01 18:31:44,301 basehttp 264951 135561809487552 "GET /products/list/ HTTP/1.1" 200 36345
+INFO 2025-06-01 18:31:44,324 basehttp 264951 135561809487552 "GET /media/products/Screenshot_from_2025-06-01_14-25-24.png HTTP/1.1" 304 0
+INFO 2025-06-01 18:31:44,407 basehttp 264951 135561800046272 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-01 18:31:46,219 basehttp 264951 135561800046272 "POST /cart/add/5/ HTTP/1.1" 302 0
+INFO 2025-06-01 18:31:46,244 basehttp 264951 135561800046272 "GET /cart/detail/ HTTP/1.1" 200 16176
+INFO 2025-06-01 18:31:46,361 basehttp 264951 135561800046272 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-01 18:31:48,098 views 264951 135561800046272 Starting to send notifications for order ORD-20250601153148
+INFO 2025-06-01 18:31:48,098 views 264951 135561800046272 Preparing customer email for murithi.titus.mb2@gmail.com
+INFO 2025-06-01 18:31:48,101 views 264951 135561800046272 Sending customer email to murithi.titus.mb2@gmail.com
+WARNING 2025-06-01 18:31:50,399 log 264951 135561809487552 Not Found: /cart/remove/30/
+WARNING 2025-06-01 18:31:50,400 basehttp 264951 135561809487552 "GET /cart/remove/30/ HTTP/1.1" 404 8206
+INFO 2025-06-01 18:31:50,841 views 264951 135561800046272 Successfully sent confirmation email to murithi.titus.mb2@gmail.com
+INFO 2025-06-01 18:31:50,843 views 264951 135561800046272 Preparing admin email for admin@savannah.com
+INFO 2025-06-01 18:31:50,850 views 264951 135561800046272 Sending admin email to admin@savannah.com
+INFO 2025-06-01 18:31:53,716 views 264951 135561800046272 Successfully sent admin notification email to admin@savannah.com
+INFO 2025-06-01 18:31:53,718 views 264951 135561800046272 Using sandbox test number for SMS
+INFO 2025-06-01 18:31:53,718 views 264951 135561800046272 Sending SMS to +254700000000
+ERROR 2025-06-01 18:31:54,330 views 264951 135561800046272 Failed to send SMS: The supplied authentication is invalid
+INFO 2025-06-01 18:31:54,359 views 264951 135561800046272 Successfully sent notifications for order ORD-20250601153148
+INFO 2025-06-01 18:34:07,639 autoreload 264951 135561910846912 /home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/coverage/collector.py changed, reloading.
+INFO 2025-06-01 18:34:09,387 autoreload 269677 133288377066944 Watching for file changes with StatReloader
+INFO 2025-06-01 18:34:09,740 views 269677 133288377066944 Attempting to initialize Africa's Talking...
+INFO 2025-06-01 18:34:09,741 views 269677 133288377066944 Username: sandbox
+INFO 2025-06-01 18:34:09,741 views 269677 133288377066944 API Key length: 28 characters
+INFO 2025-06-01 18:34:09,741 views 269677 133288377066944 Successfully initialized Africa's Talking
+INFO 2025-06-01 18:34:11,484 autoreload 269677 133288377066944 /home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/yaml/serializer.py changed, reloading.
+INFO 2025-06-01 18:34:13,866 autoreload 269718 128504556418496 Watching for file changes with StatReloader
+INFO 2025-06-01 18:34:14,360 views 269718 128504556418496 Attempting to initialize Africa's Talking...
+INFO 2025-06-01 18:34:14,360 views 269718 128504556418496 Username: sandbox
+INFO 2025-06-01 18:34:14,360 views 269718 128504556418496 API Key length: 28 characters
+INFO 2025-06-01 18:34:14,362 views 269718 128504556418496 Successfully initialized Africa's Talking

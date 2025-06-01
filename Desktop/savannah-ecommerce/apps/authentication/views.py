@@ -35,12 +35,12 @@ def edit_profile(request):
         # Handle form submission
         email = request.POST.get('email')
         phone = request.POST.get('phone')
-        
+
         # Update user email if changed
         if email and email != request.user.email:
             request.user.email = email
             request.user.save()
-        
+
         # Update customer phone number
         if hasattr(request.user, 'customer'):
             request.user.customer.phone = phone
@@ -53,10 +53,10 @@ def edit_profile(request):
                 email=request.user.email,
                 phone=phone
             )
-        
+
         messages.success(request, 'Profile updated successfully')
         return redirect('authentication:profile')
-    
+
     return render(request, 'authentication/edit_profile.html', {
         'user': request.user
     })
@@ -66,7 +66,7 @@ def social_auth_error(request):
     error = request.GET.get('error', '')
     message = request.GET.get('message', 'An error occurred during authentication.')
     email = request.GET.get('email', '')
-    
+
     if error == 'AuthAlreadyAssociated':
         # Try to find the user by email
         try:
@@ -91,7 +91,7 @@ def social_auth_error(request):
         message = 'There was a problem with the authentication token. Please try again.'
     elif error == 'AuthStateMissing':
         message = 'The authentication state is missing. Please try again.'
-    
+
     return render(request, 'authentication/social_auth_error.html', {
         'message': message,
         'error': error,

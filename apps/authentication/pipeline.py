@@ -14,4 +14,4 @@ def create_customer_profile(backend, user, response, *args, **kwargs):
                 email=user.email,
                 name=f"{response.get('given_name', '')} {response.get('family_name', '')}".strip(),
                 phone=response.get('phone_number', ''),
-            ) 
+            )

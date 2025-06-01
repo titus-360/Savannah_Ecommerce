@@ -42,4 +42,4 @@ class OrderItemForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['product'].queryset = Product.objects.filter(is_active=True)
         self.fields['product'].label = 'Select Product'
-        self.fields['quantity'].label = 'Quantity' 
+        self.fields['quantity'].label = 'Quantity'

@@ -188,4 +188,4 @@ TWILIO_PHONE_NUMBER = 'dummy_phone'
 # Dummy Site settings
 SITE_NAME = 'CI Test Site'
 SITE_URL = 'http://localhost/'
-ADMIN_EMAIL = 'ci_admin@example.com' 
+ADMIN_EMAIL = 'ci_admin@example.com'

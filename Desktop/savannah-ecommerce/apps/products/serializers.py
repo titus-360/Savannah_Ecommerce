@@ -8,7 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ['id', 'name', 'slug', 'parent', 'parent_name', 'description', 
+        fields = ['id', 'name', 'slug', 'parent', 'parent_name', 'description',
                  'children', 'average_price', 'created_at', 'updated_at']
         read_only_fields = ['slug', 'created_at', 'updated_at']
 
@@ -27,4 +27,4 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['id', 'name', 'description', 'price', 'category', 'category_name',
                  'category_path', 'stock', 'created_at', 'updated_at', 'image']
-        read_only_fields = ['category_name', 'category_path', 'created_at', 'updated_at'] 
+        read_only_fields = ['category_name', 'category_path', 'created_at', 'updated_at']

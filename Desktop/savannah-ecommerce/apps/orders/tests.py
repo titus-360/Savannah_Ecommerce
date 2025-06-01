@@ -59,7 +59,6 @@ class OrderModelTests(TestCase):
         order = Order.create_order_from_cart(self.cart)
         self.assertEqual(order.total_price, Decimal('2525.00'))
 
-
 class OrderViewTests(TestCase):
     def setUp(self):
         self.client = Client()
@@ -98,7 +97,6 @@ class OrderViewTests(TestCase):
     # Note: Testing the checkout process with successful order creation is done in the OrderModelTests.
     # Additional tests for views related to checkout might involve testing form submissions, redirects, and error handling.
 
-
 class OrderSerializerTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='password')
@@ -119,7 +117,6 @@ class OrderSerializerTests(TestCase):
         self.assertEqual(data['status'], 'pending')
         self.assertEqual(Decimal(data['total_price']), Decimal('2525.00'))
         self.assertEqual(len(data['items']), 2)
-
 
 class OrderAPIViewTests(APITestCase):
     def setUp(self):

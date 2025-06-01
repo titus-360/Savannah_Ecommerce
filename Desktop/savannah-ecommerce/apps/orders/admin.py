@@ -13,7 +13,7 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ['order_number', 'user__email', 'shipping_address']
     readonly_fields = ['order_number', 'created_at', 'updated_at']
     inlines = [OrderItemInline]
-    
+
     fieldsets = (
         ('Order Information', {
             'fields': ('order_number', 'user', 'status', 'total_price')

@@ -5,7 +5,6 @@ import django.db.models.deletion
 import django.utils.timezone
 import mptt.fields
 
-
 class Migration(migrations.Migration):
     initial = True
 

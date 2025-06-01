@@ -6,10 +6,10 @@ from django.contrib.auth import get_user_model
 def link_customers_to_users(apps, schema_editor):
     Customer = apps.get_model('customers', 'Customer')
     User = get_user_model()
-    
+
     # Get all customers without a user
     customers = Customer.objects.filter(user__isnull=True)
-    
+
     for customer in customers:
         try:
             # Try to find a user with matching email

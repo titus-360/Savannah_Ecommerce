@@ -23,17 +23,17 @@ if settings.configured:
     try:
         username = settings.AFRICAS_TALKING_USERNAME
         api_key = settings.AFRICAS_TALKING_API_KEY
-        
+
         # Log initialization attempt
         logger.info("Attempting to initialize Africa's Talking...")
         logger.info(f"Username: {username}")
         logger.info(f"API Key length: {len(api_key) if api_key else 0} characters")
-        
+
         # Initialize with sandbox credentials
         africastalking.initialize(username, api_key)
         sms = africastalking.SMS
         logger.info("Successfully initialized Africa's Talking")
-        
+
         # No need to test sending here, let's rely on the actual send later
         # try:
         #     # Try to get account info to verify credentials
@@ -43,7 +43,7 @@ if settings.configured:
         #     logger.error(f"Failed to verify Africa's Talking credentials: {str(test_error)}")
         #     sms = None
         #     raise
-        
+
     except Exception as e:
         logger.error(f"Failed to initialize Africa's Talking: {str(e)}")
         logger.error("Please check your AT_USERNAME and AT_API_KEY in .env file")
@@ -75,7 +75,7 @@ def send_order_notifications(order):
         logger.info(f"Preparing customer email for {order.user.email}")
         customer_html_message = render_to_string('orders/email/order_confirmation.html', customer_context)
         customer_plain_message = f"Thank you for your order #{order.order_number}. Total amount: ${order.total_price}"
-        
+
         try:
             logger.info(f"Sending customer email to {order.user.email}")
             send_mail(
@@ -101,7 +101,7 @@ def send_order_notifications(order):
         logger.info(f"Preparing admin email for {settings.ADMIN_EMAIL}")
         admin_html_message = render_to_string('orders/email/admin_order_notification.html', admin_context)
         admin_plain_message = f"New order #{order.order_number} received from {order.user.email}. Total amount: ${order.total_price}"
-        
+
         try:
             logger.info(f"Sending admin email to {settings.ADMIN_EMAIL}")
             send_mail(
@@ -128,14 +128,14 @@ def send_order_notifications(order):
                     if not phone.startswith('254'):
                         phone = f'254{phone}'
                     phone = f'+{phone}'
-                
+
                 # In sandbox mode, we need to use a specific format
                 if settings.AFRICAS_TALKING_USERNAME == 'sandbox':
                     # For sandbox, we can only send to specific numbers
                     # Using a test number for sandbox
                     phone = '+254700000000'
                     logger.info("Using sandbox test number for SMS")
-                
+
                 message = f"Thank you for your order #{order.order_number}. Total amount: ${order.total_price}. We'll notify you when it ships."
                 logger.info(f"Sending SMS to {phone}")
                 response = sms.send(message, [phone])
@@ -175,12 +175,12 @@ def order_create(request):
             try:
                 order = form.save(commit=False)
                 order.user = request.user
-                
+
                 # Use customer's phone number if not provided in the form
                 if not order.phone_number and hasattr(request.user, 'customer') and request.user.customer.phone:
                     order.phone_number = request.user.customer.phone
                     logger.info(f"Using customer's phone number: {order.phone_number}")
-                
+
                 order.save()
                 logger.info(f"Created order {order.order_number} for user {request.user.username}")
 

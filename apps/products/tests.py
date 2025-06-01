@@ -152,13 +152,13 @@ class ProductViewSetTests(TestCase):
         # Clear existing data to ensure a clean state for tests
         Product.objects.all().delete()
         Category.objects.all().delete()
-        
+
         print(f"DEBUG: Products after cleanup: {Product.objects.count()}") # Debug print
-        
+
         self.client = APIClient()
         self.category = Category.objects.create(name='Test Category')
         self.product = Product.objects.create(name='Test Product', price=Decimal('10.00'), category=self.category)
-        
+
         print(f"DEBUG: Products after creating test product: {Product.objects.count()}") # Debug print
 
     def test_get_products(self):

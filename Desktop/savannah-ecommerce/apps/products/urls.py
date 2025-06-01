@@ -14,7 +14,7 @@ app_name = 'products'
 urlpatterns = [
     # Removed router include as it's now in main urls.py
     # path('', include(router.urls)),
-    
+
     # Template-based views
     path('list/', views.product_list, name='product_list'),
     path('create/', views.product_create, name='product_create'),

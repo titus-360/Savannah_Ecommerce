@@ -12,4 +12,4 @@ def status_color(status):
         'delivered': 'success',
         'cancelled': 'danger'
     }
-    return status_colors.get(status, 'secondary') 
+    return status_colors.get(status, 'secondary')
