@@ -31,29 +31,31 @@ jobs:
 
     - name: Run Migrations
       run: |
-        export DJANGO_SETTINGS_MODULE=savannah_ecommerce.settings
+        export DJANGO_SETTINGS_MODULE=savannah_ecommerce.ci_settings
         python manage.py migrate
       env:
-        DB_ENGINE: django.db.backends.sqlite3
-        DB_NAME: db.sqlite3
-        DB_USER: ''
-        DB_PASSWORD: ''
-        DB_HOST: ''
-        DB_PORT: ''
-        DEBUG: False
+        # We are now using ci_settings.py which hardcodes SQLite
+        # DB_ENGINE: django.db.backends.sqlite3
+        # DB_NAME: db.sqlite3
+        # DB_USER: ''
+        # DB_PASSWORD: ''
+        # DB_HOST: ''
+        # DB_PORT: ''
+        DEBUG: False # Ensure debug is False for CI
 
     - name: Run Tests
       run: |
-        export DJANGO_SETTINGS_MODULE=savannah_ecommerce.settings
+        export DJANGO_SETTINGS_MODULE=savannah_ecommerce.ci_settings
         coverage run --source='.' manage.py test
       env:
-        DB_ENGINE: django.db.backends.sqlite3
-        DB_NAME: db.sqlite3
-        DB_USER: ''
-        DB_PASSWORD: ''
-        DB_HOST: ''
-        DB_PORT: ''
-        DEBUG: False
+        # We are now using ci_settings.py which hardcodes SQLite
+        # DB_ENGINE: django.db.backends.sqlite3
+        # DB_NAME: db.sqlite3
+        # DB_USER: ''
+        # DB_PASSWORD: ''
+        # DB_HOST: ''
+        # DB_PORT: ''
+        DEBUG: False # Ensure debug is False for CI
 
     - name: Generate Coverage Report
       run: |
