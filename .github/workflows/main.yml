@@ -12,14 +12,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: savannah_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
-      # Set dummy values for PostgreSQL variables at the job level
-      # This might prevent accidental PostgreSQL connection attempts
-      # if main settings.py is loaded prematurely.
-      DB_USER: ''
-      DB_PASSWORD: ''
-      DB_HOST: ''
-      DB_PORT: ''
+      DB_NAME: savannah_db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: localhost
+      DB_PORT: 5433
       DJANGO_SETTINGS_MODULE: savannah_ecommerce.ci_settings
       DEBUG: False
 

@@ -31,7 +31,7 @@ if settings.configured:
 
         # Initialize with sandbox credentials
         africastalking.initialize(username, api_key)
-        sms = africastalking.SMS
+sms = africastalking.SMS
         logger.info("Successfully initialized Africa's Talking")
 
         # No need to test sending here, let's rely on the actual send later
