@@ -12,6 +12,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Set dummy values for PostgreSQL variables at the job level
+      # This might prevent accidental PostgreSQL connection attempts
+      # if main settings.py is loaded prematurely.
+      DB_USER: ''
+      DB_PASSWORD: ''
+      DB_HOST: ''
+      DB_PORT: ''
 
     steps:
     - name: Checkout Code
@@ -35,6 +43,7 @@ jobs:
         python manage.py migrate
       env:
         # We are now using ci_settings.py which hardcodes SQLite
+        # The job-level env vars should also help prevent PostgreSQL connection.
         # DB_ENGINE: django.db.backends.sqlite3
         # DB_NAME: db.sqlite3
         # DB_USER: ''
@@ -49,6 +58,7 @@ jobs:
         coverage run --source='.' manage.py test
       env:
         # We are now using ci_settings.py which hardcodes SQLite
+        # The job-level env vars should also help prevent PostgreSQL connection.
         # DB_ENGINE: django.db.backends.sqlite3
         # DB_NAME: db.sqlite3
         # DB_USER: ''
