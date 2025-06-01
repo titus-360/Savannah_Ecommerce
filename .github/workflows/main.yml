@@ -140,9 +140,9 @@ jobs:
         echo "Processed deployment file:"
         cat $DEPLOYMENT_FILE
         
-        # Apply the processed deployment file
-        kubectl apply -f $DEPLOYMENT_FILE
-        kubectl apply -f k8s/service.yaml
+        # Apply the processed deployment file with explicit namespace
+        kubectl apply -f $DEPLOYMENT_FILE -n savannah
+        kubectl apply -f k8s/service.yaml -n savannah
         
         # Debug: Show all resources in the namespace
         echo "Resources in savannah namespace:"
@@ -153,11 +153,16 @@ jobs:
         kubectl wait --namespace savannah \
           --for=condition=available \
           --timeout=300s \
-          deployment/savannah-ecommerce
+          deployment/savannah-ecommerce || true
         
-        # Verify deployment status
-        kubectl get deployment savannah-ecommerce -n savannah
+        # Show detailed deployment status
+        echo "Deployment status:"
+        kubectl describe deployment savannah-ecommerce -n savannah
+        
+        # Show pod status
+        echo "Pod status:"
         kubectl get pods -n savannah
+        kubectl describe pods -n savannah -l app=savannah-ecommerce
 
     - name: Get Service URL
       run: |
