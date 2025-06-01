@@ -36,6 +36,7 @@ jobs:
       env:
         DB_ENGINE: django.db.backends.sqlite3
         DB_NAME: db.sqlite3
+        DEBUG: False
 
     - name: Run Tests
       run: |
@@ -44,6 +45,7 @@ jobs:
       env:
         DB_ENGINE: django.db.backends.sqlite3
         DB_NAME: db.sqlite3
+        DEBUG: False
 
     - name: Generate Coverage Report
       run: |
