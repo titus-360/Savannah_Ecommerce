@@ -133,4 +133,12 @@ jobs:
         kubectl apply -f k8s/service.yaml
         
         # Wait for deployment to be ready
-        kubectl rollout status deployment/savannah-ecommerce -n savannah
+        echo "Waiting for deployment to be ready..."
+        kubectl wait --namespace savannah \
+          --for=condition=available \
+          --timeout=300s \
+          deployment/savannah-ecommerce
+        
+        # Verify deployment status
+        kubectl get deployment savannah-ecommerce -n savannah
+        kubectl get pods -n savannah
