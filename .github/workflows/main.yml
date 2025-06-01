@@ -20,6 +20,8 @@ jobs:
       DB_PASSWORD: ''
       DB_HOST: ''
       DB_PORT: ''
+      DJANGO_SETTINGS_MODULE: savannah_ecommerce.ci_settings
+      DEBUG: False
 
     steps:
     - name: Checkout Code
@@ -37,40 +39,13 @@ jobs:
         # Install tools for linting, formatting, coverage, security, and static analysis
         pip install flake8 black coverage pip-audit bandit dj-database-url
 
-    - name: Force CI Settings in manage.py
-      run: |
-        # This is a workaround to ensure ci_settings.py is loaded first for database config
-        sed -i "/^import sys$/a import os\nos.environ[\'DJANGO_SETTINGS_MODULE\'] = \'savannah_ecommerce.ci_settings\'" manage.py
-
     - name: Run Migrations
       run: |
-        # DJANGO_SETTINGS_MODULE is now forced in manage.py
         python manage.py migrate
-      env:
-        # We are now using ci_settings.py which hardcodes SQLite
-        # The job-level env vars should also help prevent PostgreSQL connection.
-        # DB_ENGINE: django.db.backends.sqlite3
-        # DB_NAME: db.sqlite3
-        # DB_USER: ''
-        # DB_PASSWORD: ''
-        # DB_HOST: ''
-        # DB_PORT: ''
-        DEBUG: False # Ensure debug is False for CI
 
     - name: Run Tests
       run: |
-        # DJANGO_SETTINGS_MODULE is now forced in manage.py
         coverage run --source='.' manage.py test
-      env:
-        # We are now using ci_settings.py which hardcodes SQLite
-        # The job-level env vars should also help prevent PostgreSQL connection.
-        # DB_ENGINE: django.db.backends.sqlite3
-        # DB_NAME: db.sqlite3
-        # DB_USER: ''
-        # DB_PASSWORD: ''
-        # DB_HOST: ''
-        # DB_PORT: ''
-        DEBUG: False # Ensure debug is False for CI
 
     - name: Generate Coverage Report
       run: |
