@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'mptt',
     'social_django',
     'oauth2_provider',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -45,6 +46,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 ]
 
 ROOT_URLCONF = 'savannah_ecommerce.urls'
@@ -60,6 +63,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -116,4 +121,71 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Coverage configuration
-COVERAGE_RCFILE = '.coveragerc' 
+COVERAGE_RCFILE = '.coveragerc'
+
+# REST Framework configuration
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.FormParser',
+    ],
+}
+
+# Minimal Social Auth settings for CI
+SOCIAL_AUTH_TRAILING_SLASH = False
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'dummy_key'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'dummy_secret'
+SOCIAL_AUTH_PIPELINE = [
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'apps.authentication.pipeline.create_customer_profile',
+]
+
+# Minimal OAuth2 Toolkit settings for CI
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'read': 'Read scope',
+        'write': 'Write scope',
+    },
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 60,
+    'REFRESH_TOKEN_EXPIRE_SECONDS': 60 * 10,
+    'ROTATE_REFRESH_TOKEN': False,
+    'AUTHORIZATION_CODE_EXPIRE_SECONDS': 60,
+}
+
+# Dummy Email backend for CI
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+# Dummy Africa's Talking settings (if needed by code logic, though we added a check)
+AFRICAS_TALKING_USERNAME = 'dummy_user'
+AFRICAS_TALKING_API_KEY = 'dummy_key'
+
+# Dummy Twilio settings (if needed by code logic)
+TWILIO_ACCOUNT_SID = 'dummy_sid'
+TWILIO_AUTH_TOKEN = 'dummy_token'
+TWILIO_PHONE_NUMBER = 'dummy_phone'
+
+# Dummy Site settings
+SITE_NAME = 'CI Test Site'
+SITE_URL = 'http://localhost/'
+ADMIN_EMAIL = 'ci_admin@example.com' 
