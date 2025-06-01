@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .dashboard-container {
+        padding: 2rem 0;
+        background-color: #f8f9fa;
+        min-height: calc(100vh - 76px);
+    }
+    .welcome-card {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        color: white;
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+        position: relative;
+        overflow: hidden;
+    }
+    .welcome-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        transform: rotate(30deg);
+    }
+    .welcome-card h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    .welcome-card p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+    .profile-image {
+        width: 100px;
+        height: 100px;
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .stats-card {
+        background: white;
+        border-radius: 1.2rem;
+        padding: 1.8rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    .stats-card h5 {
+        color: #6b7280;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .stats-card h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+    .stats-card small {
+        color: #6b7280;
+        font-size: 0.9rem;
+    }
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+    }
+    .action-card {
+        background: white;
+        border-radius: 1.2rem;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+    .action-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .action-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    .action-card:hover::before {
+        opacity: 1;
+    }
+    .action-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1.2rem;
+        color: #6366f1;
+        transition: transform 0.3s ease;
+    }
+    .action-card:hover .action-icon {
+        transform: scale(1.1);
+    }
+    .action-card h5 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+    .action-card p {
+        color: #6b7280;
+        font-size: 0.95rem;
+        margin: 0;
+    }
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        border-radius: 3px;
+    }
+</style>
+
+<div class="dashboard-container">
+    <!-- Welcome Section -->
+    <div class="welcome-card">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2>Welcome back, {{ user.get_full_name|default:user.username }}! 👋</h2>
+                <p class="mb-0">Here's what's happening with your account today.</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <img src="{{ user.social_auth.first.extra_data.picture|default:'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' }}" 
+                     alt="Profile" 
+                     class="rounded-circle profile-image"
+                     style="object-fit: cover;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="stats-card">
+                <h5>Total Orders</h5>
+                <h2 class="mb-0">{{ user.orders.count }}</h2>
+                <small class="text-muted">
+                    {% if user.orders.count == 0 %}
+                        No orders yet
+                    {% else %}
+                        {% with latest_order=user.orders.first %}
+                            Last order: {{ latest_order.created_at|date:"M d, Y" }}
+                        {% endwith %}
+                    {% endif %}
+                </small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card">
+                <h5>Wishlist Items</h5>
+                <h2 class="mb-0">{{ user.wishlist.count }}</h2>
+                <small class="text-muted">
+                    {% if user.wishlist.count == 0 %}
+                        No items in wishlist
+                    {% else %}
+                        {{ user.wishlist.count }} items saved
+                    {% endif %}
+                </small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card">
+                <h5>Account Status</h5>
+                <h2 class="mb-0">Active</h2>
+                <small class="text-muted">Member since {{ user.date_joined|date:"M Y" }}</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <h4 class="section-title">Quick Actions</h4>
+    <div class="quick-actions">
+        <a href="{% url 'products:product_list' %}" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h5>Start Shopping</h5>
+            <p class="text-muted">Browse our products</p>
+        </a>
+        <a href="{% url 'cart:cart_detail' %}" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h5>Wishlist</h5>
+            <p class="text-muted">View saved items</p>
+        </a>
+        <a href="{% url 'authentication:profile' %}" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-user-cog"></i>
+            </div>
+            <h5>Profile Settings</h5>
+            <p class="text-muted">Update your information</p>
+        </a>
+        <a href="#" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <h5>Help Center</h5>
+            <p class="text-muted">Get support</p>
+        </a>
+    </div>
+</div>
+{% endblock %} 

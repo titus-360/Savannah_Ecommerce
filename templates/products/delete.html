@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .delete-container {
+        padding: 2rem 0;
+    }
+    .delete-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        text-align: center;
+    }
+    .product-image {
+        max-width: 200px;
+        border-radius: 0.5rem;
+        margin: 1rem auto;
+    }
+    .warning-icon {
+        color: #dc3545;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="delete-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="delete-card">
+                <i class="fas fa-exclamation-triangle warning-icon"></i>
+                <h2 class="mb-4">Delete Product</h2>
+                
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                {% endif %}
+                
+                <p class="mb-4">
+                    Are you sure you want to delete <strong>{{ product.name }}</strong>?
+                    This action cannot be undone.
+                </p>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="{% url 'products:detail' product.pk %}" class="btn btn-outline-secondary">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            Delete Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

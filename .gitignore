@@ -1,0 +1,23 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python bytecode
+*.pyc
+__pycache__/
+
+# Database files
+db.sqlite3
+postgres_data/
+
+# Media and static files
+media/
+staticfiles/
+
+# Environment variables file
+.env
+
+# Editor/IDE specific files (optional, but common)
+.vscode/
+.idea/
