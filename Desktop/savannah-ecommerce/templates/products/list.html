@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .filters-sidebar {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .filter-section {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .filter-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .filter-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+    }
+
+    .filter-options {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .filter-option {
+        margin-bottom: 0.5rem;
+    }
+
+    .filter-option label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .filter-option input[type="checkbox"] {
+        margin-right: 0.5rem;
+    }
+
+    .filter-option:hover label {
+        color: var(--accent-color);
+    }
+
+    .price-range {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .price-input {
+        width: 100px;
+        padding: 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        padding: 1rem;
+        background: #f8f9fa;
+    }
+
+    .product-info {
+        padding: 1rem;
+    }
+
+    .product-title {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--text-dark);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .product-price {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #B12704;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-stock {
+        font-size: 0.9rem;
+        color: #007600;
+        margin-bottom: 1rem;
+    }
+
+    .add-to-cart-btn {
+        width: 100%;
+        padding: 0.5rem;
+        background: var(--accent-color);
+        border: none;
+        border-radius: 4px;
+        color: var(--text-dark);
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .add-to-cart-btn:hover {
+        background: #f3a847;
+    }
+
+    .sort-bar {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .sort-select {
+        padding: 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        background: white;
+    }
+
+    .pagination {
+        margin-top: 2rem;
+        justify-content: center;
+    }
+
+    .page-link {
+        color: var(--primary-color);
+        border: 1px solid var(--border-color);
+        padding: 0.5rem 1rem;
+    }
+
+    .page-link:hover {
+        background-color: var(--accent-color);
+        color: var(--text-dark);
+    }
+
+    .page-item.active .page-link {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+</style>
+
+<div class="row">
+    <!-- Filters Sidebar -->
+    <div class="col-md-3">
+        <div class="filters-sidebar">
+            <form method="get">
+                <!-- Price Range Filter -->
+                <div class="filter-section">
+                    <h5 class="filter-title">Price Range</h5>
+                    <div class="price-range">
+                        <input type="number" name="min_price" class="price-input" placeholder="Min" value="{{ request.GET.min_price }}">
+                        <span>to</span>
+                        <input type="number" name="max_price" class="price-input" placeholder="Max" value="{{ request.GET.max_price }}">
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="filter-section">
+                    <h5 class="filter-title">Categories</h5>
+                    <ul class="filter-options">
+                        {% for category in categories %}
+                        <li class="filter-option">
+                            <label>
+                                <input type="checkbox" name="category" value="{{ category.id }}"
+                                    {% if category.id|stringformat:"i" in request.GET.category %}checked{% endif %}>
+                                {{ category.name }}
+                            </label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Rating Filter -->
+                <div class="filter-section">
+                    <h5 class="filter-title">Rating</h5>
+                    <ul class="filter-options">
+                        {% for i in "54321" %}
+                        <li class="filter-option">
+                            <label>
+                                <input type="radio" name="rating" value="{{ i }}"
+                                    {% if request.GET.rating == i %}checked{% endif %}>
+                                {% with ''|center:i as range %}
+                                    {% for _ in range %}
+                                        <i class="fas fa-star"></i>
+                                    {% endfor %}
+                                {% endwith %}
+                                {% with ''|center:5|slice:i as range %}
+                                    {% for _ in range %}
+                                        <i class="far fa-star"></i>
+                                    {% endfor %}
+                                {% endwith %}
+                            </label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="col-md-9">
+        <!-- Sort Bar -->
+        <div class="sort-bar">
+            <span>{{ products.paginator.count }} results</span>
+            <select class="sort-select" onchange="window.location.href=this.value">
+                <option value="?sort=price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                <option value="?sort=price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                <option value="?sort=rating_desc" {% if request.GET.sort == 'rating_desc' %}selected{% endif %}>Top Rated</option>
+                <option value="?sort=newest" {% if request.GET.sort == 'newest' %}selected{% endif %}>Newest Arrivals</option>
+            </select>
+        </div>
+
+        <!-- Products -->
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <a href="{% url 'products:detail' product.id %}" class="text-decoration-none">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                    {% else %}
+                        <div class="product-image d-flex align-items-center justify-content-center">
+                            <i class="fas fa-image fa-3x text-muted"></i>
+                        </div>
+                    {% endif %}
+                    <div class="product-info">
+                        <h3 class="product-title">{{ product.name }}</h3>
+                        <div class="product-price">KES {{ product.price }}</div>
+                        <div class="product-stock">
+                            {% if product.stock > 0 %}
+                                In Stock
+                            {% else %}
+                                Out of Stock
+                            {% endif %}
+                        </div>
+                        {% if product.stock > 0 %}
+                            <form action="{% url 'cart:add_to_cart' product.id %}" method="post" class="add-to-cart-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="add-to-cart-btn">
+                                    Add to Cart
+                                </button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>No products found matching your criteria.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if products.has_other_pages %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if products.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ products.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Previous</a>
+                    </li>
+                {% endif %}
+
+                {% for num in products.paginator.page_range %}
+                    {% if products.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if products.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ products.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 
