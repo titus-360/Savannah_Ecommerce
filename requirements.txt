@@ -8,6 +8,7 @@ Pillow
 # Database
 psycopg2-binary==2.9.7
 django-extensions==3.2.3
+dj-database-url==1.2.0
 
 # Authentication & Authorization
 django-oauth-toolkit==1.7.1
