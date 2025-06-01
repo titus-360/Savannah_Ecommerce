@@ -142,3 +142,9 @@ jobs:
         # Verify deployment status
         kubectl get deployment savannah-ecommerce -n savannah
         kubectl get pods -n savannah
+
+    - name: Get Service URL
+      run: |
+        echo "Getting service URL..."
+        minikube service savannah-ecommerce -n savannah --url
+        echo "To access the application, run: minikube service savannah-ecommerce -n savannah"
