@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Django CI
+name: Django CI/CD
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     
     services:
@@ -38,6 +38,8 @@ jobs:
       DB_PASSWORD: postgres
       DB_HOST: localhost
       DB_PORT: 5432
+      DOCKER_REGISTRY: ghcr.io/${{ github.repository_owner }}
+      IMAGE_TAG: ${{ github.sha }}
 
     steps:
     - name: Checkout Code
@@ -84,3 +86,46 @@ jobs:
     - name: Generate Coverage Report
       run: |
         coverage report -m
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and Push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ env.DOCKER_REGISTRY }}/savannah-ecommerce:${{ env.IMAGE_TAG }}
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Set up minikube
+      uses: medyagh/setup-minikube@master
+
+    - name: Deploy to Kubernetes
+      run: |
+        # Create namespace if it doesn't exist
+        kubectl create namespace savannah --dry-run=client -o yaml | kubectl apply -f -
+        
+        # Create secret for database password
+        kubectl create secret generic db-secrets \
+          --namespace savannah \
+          --from-literal=password=postgres \
+          --dry-run=client -o yaml | kubectl apply -f -
+        
+        # Apply Kubernetes manifests
+        envsubst < k8s/deployment.yaml | kubectl apply -f -
+        kubectl apply -f k8s/service.yaml
+        
+        # Wait for deployment to be ready
+        kubectl rollout status deployment/savannah-ecommerce -n savannah
