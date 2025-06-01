@@ -128,9 +128,25 @@ jobs:
           --from-literal=password=postgres \
           --dry-run=client -o yaml | kubectl apply -f -
         
-        # Apply Kubernetes manifests
-        envsubst < k8s/deployment.yaml | kubectl apply -f -
+        # Debug: Show environment variables
+        echo "DOCKER_REGISTRY: $DOCKER_REGISTRY"
+        echo "IMAGE_TAG: $IMAGE_TAG"
+        
+        # Create a temporary file with substituted values
+        export DEPLOYMENT_FILE=$(mktemp)
+        envsubst < k8s/deployment.yaml > $DEPLOYMENT_FILE
+        
+        # Debug: Show the processed deployment file
+        echo "Processed deployment file:"
+        cat $DEPLOYMENT_FILE
+        
+        # Apply the processed deployment file
+        kubectl apply -f $DEPLOYMENT_FILE
         kubectl apply -f k8s/service.yaml
+        
+        # Debug: Show all resources in the namespace
+        echo "Resources in savannah namespace:"
+        kubectl get all -n savannah
         
         # Wait for deployment to be ready
         echo "Waiting for deployment to be ready..."
