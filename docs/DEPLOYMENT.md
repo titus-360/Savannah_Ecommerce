@@ -8,6 +8,7 @@ This guide covers the deployment of the Savannah E-commerce platform using Docke
 - Kubernetes cluster (e.g., Minikube, GKE, EKS)
 - kubectl configured
 - Container registry access (e.g., GitHub Container Registry)
+- Google Cloud Platform account for OAuth2
 
 ## Environment Variables
 
@@ -40,14 +41,28 @@ DEFAULT_FROM_EMAIL=your-email@gmail.com
 AT_USERNAME=your-username
 AT_API_KEY=your-api-key
 
-# OAuth2
-OAUTH2_CLIENT_ID=your-client-id
-OAUTH2_CLIENT_SECRET=your-client-secret
-
 # Google OAuth2
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=your-google-client-id
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=your-google-client-secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE=['email', 'profile']
+SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS={'access_type': 'offline'}
+
+# OAuth2 Provider
+OAUTH2_CLIENT_ID=your-client-id
+OAUTH2_CLIENT_SECRET=your-client-secret
 ```
+
+## Google OAuth2 Setup
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com)
+2. Create a new project or select an existing one
+3. Enable the Google+ API
+4. Go to Credentials
+5. Create OAuth 2.0 Client ID
+6. Add authorized redirect URIs:
+   - `https://your-domain.com/complete/google-oauth2/`
+   - `https://www.your-domain.com/complete/google-oauth2/`
+7. Copy the Client ID and Client Secret to your `.env` file
 
 ## Docker Deployment
 

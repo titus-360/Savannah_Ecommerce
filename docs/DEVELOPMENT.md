@@ -40,27 +40,45 @@ DB_PASSWORD=postgres
 DB_HOST=localhost
 DB_PORT=5433
 REDIS_URL=redis://localhost:6379/0
+
+# Google OAuth2 Settings
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=your-google-client-id
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=your-google-client-secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE=['email', 'profile']
+SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS={'access_type': 'offline'}
 ```
 
-### 5. Start Development Services
+### 5. Configure Google OAuth2
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com)
+2. Create a new project or select an existing one
+3. Enable the Google+ API
+4. Go to Credentials
+5. Create OAuth 2.0 Client ID
+6. Add authorized redirect URIs:
+   - `http://localhost:8000/complete/google-oauth2/` (for development)
+   - `https://your-domain.com/complete/google-oauth2/` (for production)
+7. Copy the Client ID and Client Secret to your `.env` file
+
+### 6. Start Development Services
 
 ```bash
 docker-compose up -d
 ```
 
-### 6. Run Migrations
+### 7. Run Migrations
 
 ```bash
 python manage.py migrate
 ```
 
-### 7. Create Superuser
+### 8. Create Superuser
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### 8. Run Development Server
+### 9. Run Development Server
 
 ```bash
 python manage.py runserver
@@ -347,4 +365,70 @@ LOGGING = {
 For development support:
 - Email: dev@savannah.com
 - GitHub Issues: https://github.com/yourusername/savannah-ecommerce/issues
-- Documentation: https://docs.savannah.com 
+- Documentation: https://docs.savannah.com
+
+## Authentication
+
+### Google OAuth2 Setup
+
+The application uses Google OAuth2 for authentication. The setup is handled by `django-allauth` and `social-auth-app-django`.
+
+#### Configuration in settings.py
+
+```python
+INSTALLED_APPS = [
+    # ...
+    'django.contrib.auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['email', 'profile'],
+        'AUTH_PARAMS': {'access_type': 'offline'},
+    }
+}
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+```
+
+#### Social Account Templates
+
+The application uses custom templates for social authentication. They are located in:
+- `templates/socialaccount/login.html`
+- `templates/socialaccount/signup.html`
+
+#### Testing Authentication
+
+To test Google OAuth2 authentication:
+
+1. Ensure your Google OAuth2 credentials are correctly set in `.env`
+2. Start the development server
+3. Visit `/accounts/login/`
+4. Click the "Sign in with Google" button
+5. Complete the Google authentication flow
+
+### API Authentication
+
+For API access, the application uses OAuth2 tokens. To obtain a token:
+
+```bash
+curl -X POST http://localhost:8000/o/token/ \
+     -d "grant_type=password" \
+     -d "username=your_username" \
+     -d "password=your_password" \
+     -d "client_id=your_client_id" \
+     -d "client_secret=your_client_secret"
+``` 

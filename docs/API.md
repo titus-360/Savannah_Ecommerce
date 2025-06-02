@@ -6,11 +6,40 @@ The Savannah E-commerce API provides a comprehensive set of endpoints for managi
 
 ## Authentication
 
-### OAuth2 Authentication
+### Google OAuth2 Authentication
 
-The API uses OAuth2 for authentication. To access protected endpoints, you need to obtain an access token.
+The API supports Google OAuth2 authentication for web applications. To authenticate:
 
-#### Obtaining an Access Token
+1. Redirect users to the Google OAuth2 endpoint:
+```
+GET /accounts/google/login/
+```
+
+2. After successful authentication, users will be redirected to:
+```
+/complete/google-oauth2/
+```
+
+3. The application will create or update the user's account and provide an OAuth2 token.
+
+### OAuth2 Token Authentication
+
+For API access, you need to obtain an OAuth2 token. There are two ways to get a token:
+
+#### 1. Using Google OAuth2 (Web Application)
+
+After Google authentication, you can obtain a token using the OAuth2 endpoint:
+
+```bash
+curl -X POST http://localhost:8000/o/token/ \
+     -d "grant_type=authorization_code" \
+     -d "code=your_auth_code" \
+     -d "client_id=your_client_id" \
+     -d "client_secret=your_client_secret" \
+     -d "redirect_uri=your_redirect_uri"
+```
+
+#### 2. Using Password Grant (Mobile/Desktop Applications)
 
 ```bash
 curl -X POST http://localhost:8000/o/token/ \
@@ -37,6 +66,18 @@ Response:
 Include the access token in the Authorization header:
 ```
 Authorization: Bearer your_access_token
+```
+
+### Token Refresh
+
+To refresh an expired token:
+
+```bash
+curl -X POST http://localhost:8000/o/token/ \
+     -d "grant_type=refresh_token" \
+     -d "refresh_token=your_refresh_token" \
+     -d "client_id=your_client_id" \
+     -d "client_secret=your_client_secret"
 ```
 
 ## API Endpoints

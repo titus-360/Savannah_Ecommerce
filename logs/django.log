@@ -2615,3 +2615,36 @@ INFO 2025-06-02 01:44:31,790 basehttp 148073 124480124876480 "GET /?next=/cart/c
 INFO 2025-06-02 01:44:34,932 basehttp 148073 124480124876480 "POST /auth/login/ HTTP/1.1" 302 0
 INFO 2025-06-02 01:44:34,961 basehttp 148073 124480124876480 "GET / HTTP/1.1" 200 15861
 INFO 2025-06-02 01:44:35,067 basehttp 148073 124480124876480 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-02 14:58:04,962 autoreload 176434 124563766584768 Watching for file changes with StatReloader
+INFO 2025-06-02 14:58:05,092 views 176434 124563766584768 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 14:58:05,130 views 176434 124563766584768 Username: sandbox
+INFO 2025-06-02 14:58:05,130 views 176434 124563766584768 API Key length: 0 characters
+INFO 2025-06-02 14:58:05,130 views 176434 124563766584768 Successfully initialized Africa's Talking
+INFO 2025-06-02 14:58:20,461 basehttp 176434 124563673315008 "GET /auth/logout/ HTTP/1.1" 302 0
+INFO 2025-06-02 14:58:20,482 basehttp 176434 124563673315008 "GET /auth/login/ HTTP/1.1" 200 11617
+INFO 2025-06-02 14:58:20,630 basehttp 176434 124563673315008 "GET /cart/count/ HTTP/1.1" 302 0
+INFO 2025-06-02 14:58:20,646 basehttp 176434 124563673315008 "GET /?next=/cart/count/ HTTP/1.1" 200 10847
+INFO 2025-06-02 14:58:25,324 basehttp 176434 124563673315008 "GET /auth/login/google-oauth2/ HTTP/1.1" 302 0
+INFO 2025-06-02 14:58:36,229 basehttp 176434 124563673315008 "GET /auth/complete/google-oauth2/?state=IKWvlQKqqAGdIayOYt9fVhqhzGtgZIBr&code=4%2F0AUJR-x583NradJzjb3hUCNPX-B8L93clgbz9pp87q0QDQxgyKrfR-M4kbS00CGll7rKDZQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 0
+INFO 2025-06-02 14:58:36,276 basehttp 176434 124563673315008 "GET / HTTP/1.1" 200 15873
+INFO 2025-06-02 14:58:36,460 basehttp 176434 124563673315008 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-02 14:58:41,382 basehttp 176434 124563673315008 "GET /products/list/ HTTP/1.1" 200 36351
+INFO 2025-06-02 14:58:41,409 basehttp 176434 124563673315008 "GET /media/products/Screenshot_from_2025-06-01_14-25-24.png HTTP/1.1" 304 0
+INFO 2025-06-02 14:58:41,638 basehttp 176434 124563673315008 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-02 14:58:43,056 basehttp 176434 124563673315008 "POST /cart/add/6/ HTTP/1.1" 302 0
+INFO 2025-06-02 14:58:43,082 basehttp 176434 124563673315008 "GET /cart/detail/ HTTP/1.1" 200 16104
+INFO 2025-06-02 14:58:43,190 basehttp 176434 124563673315008 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-02 14:58:44,391 views 176434 124563673315008 Starting to send notifications for order ORD-20250602115844
+INFO 2025-06-02 14:58:44,391 views 176434 124563673315008 Preparing customer email for murithititus510@gmail.com
+INFO 2025-06-02 14:58:44,395 views 176434 124563673315008 Sending customer email to murithititus510@gmail.com
+INFO 2025-06-02 14:58:47,934 views 176434 124563673315008 Successfully sent confirmation email to murithititus510@gmail.com
+INFO 2025-06-02 14:58:47,935 views 176434 124563673315008 Preparing admin email for admin@savannah.com
+INFO 2025-06-02 14:58:47,949 views 176434 124563673315008 Sending admin email to admin@savannah.com
+INFO 2025-06-02 14:58:48,693 basehttp 176434 124563664922304 "GET /cart/checkout/ HTTP/1.1" 302 0
+INFO 2025-06-02 14:58:48,712 basehttp 176434 124563664922304 "GET /cart/detail/ HTTP/1.1" 200 13536
+INFO 2025-06-02 14:58:48,807 basehttp 176434 124563664922304 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-02 14:58:50,626 views 176434 124563673315008 Successfully sent admin notification email to admin@savannah.com
+INFO 2025-06-02 14:58:50,626 views 176434 124563673315008 Using sandbox test number for SMS
+INFO 2025-06-02 14:58:50,627 views 176434 124563673315008 Sending SMS to +254700000000
+ERROR 2025-06-02 14:58:51,298 views 176434 124563673315008 Failed to send SMS: The supplied authentication is invalid
+INFO 2025-06-02 14:58:51,306 views 176434 124563673315008 Successfully sent notifications for order ORD-20250602115844
