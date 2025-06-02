@@ -2648,3 +2648,52 @@ INFO 2025-06-02 14:58:50,626 views 176434 124563673315008 Using sandbox test num
 INFO 2025-06-02 14:58:50,627 views 176434 124563673315008 Sending SMS to +254700000000
 ERROR 2025-06-02 14:58:51,298 views 176434 124563673315008 Failed to send SMS: The supplied authentication is invalid
 INFO 2025-06-02 14:58:51,306 views 176434 124563673315008 Successfully sent notifications for order ORD-20250602115844
+INFO 2025-06-02 15:14:00,220 autoreload 185168 125444553102784 Watching for file changes with StatReloader
+INFO 2025-06-02 15:14:00,281 views 185168 125444553102784 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 15:14:00,281 views 185168 125444553102784 Username: sandbox
+INFO 2025-06-02 15:14:00,281 views 185168 125444553102784 API Key length: 0 characters
+INFO 2025-06-02 15:14:00,281 views 185168 125444553102784 Successfully initialized Africa's Talking
+INFO 2025-06-02 15:14:10,112 basehttp 185168 125444384880320 "GET /admin/products/category/ HTTP/1.1" 302 0
+INFO 2025-06-02 15:14:10,143 basehttp 185168 125444384880320 "GET /admin/login/?next=/admin/products/category/ HTTP/1.1" 200 3751
+INFO 2025-06-02 15:14:10,202 basehttp 185168 125444376487616 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:10,202 basehttp 185168 125444384880320 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:10,203 basehttp 185168 125444359702208 "GET /static/admin/css/login.css HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:10,203 basehttp 185168 125444368094912 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:10,203 basehttp 185168 125444351309504 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:10,229 basehttp 185168 125444351309504 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:10,229 basehttp 185168 125444359702208 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,280 basehttp 185168 125444351309504 "POST /admin/login/?next=/admin/products/category/ HTTP/1.1" 302 0
+INFO 2025-06-02 15:14:12,394 basehttp 185168 125444351309504 "GET /admin/products/category/ HTTP/1.1" 200 24154
+INFO 2025-06-02 15:14:12,470 basehttp 185168 125444351309504 "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,474 basehttp 185168 125444376487616 "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,475 basehttp 185168 125444384880320 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,477 basehttp 185168 125444384880320 "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,478 basehttp 185168 125444342916800 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,478 basehttp 185168 125444376487616 "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,478 basehttp 185168 125444368094912 "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,482 basehttp 185168 125444368094912 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,482 basehttp 185168 125444342916800 "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,493 basehttp 185168 125444359702208 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-06-02 15:14:12,495 basehttp 185168 125444359702208 "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,530 basehttp 185168 125444342916800 "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,546 basehttp 185168 125444359702208 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:12,546 basehttp 185168 125444368094912 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:16,523 basehttp 185168 125444368094912 "GET /admin/products/product/ HTTP/1.1" 200 18110
+INFO 2025-06-02 15:14:16,568 basehttp 185168 125444368094912 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-06-02 15:14:18,331 basehttp 185168 125444368094912 "GET /admin/products/product/4/change/ HTTP/1.1" 200 21150
+INFO 2025-06-02 15:14:18,368 basehttp 185168 125444368094912 "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:18,375 basehttp 185168 125444342916800 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:18,376 basehttp 185168 125444384880320 "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:18,387 basehttp 185168 125444384880320 "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:18,396 basehttp 185168 125444359702208 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-06-02 15:14:18,416 basehttp 185168 125444359702208 "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:18,416 basehttp 185168 125444368094912 "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:34,598 basehttp 185168 125444359702208 "POST /admin/products/product/4/change/ HTTP/1.1" 302 0
+INFO 2025-06-02 15:14:34,634 basehttp 185168 125444359702208 "GET /admin/products/product/ HTTP/1.1" 200 18329
+INFO 2025-06-02 15:14:34,716 basehttp 185168 125444359702208 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-06-02 15:14:34,775 basehttp 185168 125444359702208 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+INFO 2025-06-02 15:14:43,254 basehttp 185168 125444359702208 "GET / HTTP/1.1" 200 15861
+INFO 2025-06-02 15:14:43,329 basehttp 185168 125444359702208 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-02 15:14:44,791 basehttp 185168 125444359702208 "GET /products/list/ HTTP/1.1" 200 36281
+INFO 2025-06-02 15:14:44,829 basehttp 185168 125444359702208 "GET /media/products/Screenshot_from_2025-05-07_19-51-20.png HTTP/1.1" 200 54305
+INFO 2025-06-02 15:14:44,849 basehttp 185168 125444368094912 "GET /cart/count/ HTTP/1.1" 200 12
