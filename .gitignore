@@ -1,23 +1,83 @@
-# Virtual environments
-.venv/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
 venv/
+.venv/
+ENV/
 env/
 
-# Python bytecode
-*.pyc
-__pycache__/
-
-# Database files
-db.sqlite3
-postgres_data/
-
-# Media and static files
-media/
-staticfiles/
-
-# Environment variables file
-.env
-
-# Editor/IDE specific files (optional, but common)
-.vscode/
+# IDE
 .idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+static/
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Kubernetes
+minikube-linux-amd64
+minikube-darwin-amd64
+minikube-windows-amd64
+*.kubeconfig
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# Coverage
+.coverage
+coverage.xml
+htmlcov/
+
+# Database
+postgres_data/
+redis_data/
+
+# Large files
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.iso
+*.img
+*.vmdk
+*.vdi
+*.qcow2
+*.raw
+*.bin
