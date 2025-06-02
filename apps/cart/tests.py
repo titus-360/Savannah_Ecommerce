@@ -33,8 +33,8 @@ class CartModelTests(TestCase):
 
         # Add the same product again
         cart_item1_again = self.cart.add_item(self.product1, 1)
-        self.assertEqual(self.cart.items.count(), 1) # Should still be 1 item
-        self.assertEqual(cart_item1_again.quantity, 3) # Quantity should be updated
+        self.assertEqual(self.cart.items.count(), 1) 
+        self.assertEqual(cart_item1_again.quantity, 3)
         self.assertEqual(cart_item1_again.subtotal, Decimal('3600.00'))
         self.assertEqual(self.cart.total_price, Decimal('3600.00'))
 
@@ -98,7 +98,7 @@ class CartViewTests(TestCase):
 
     def test_add_to_cart_view(self):
         response = self.client.post(reverse('cart:add_to_cart', args=[self.product.id]), {'quantity': 2})
-        self.assertEqual(response.status_code, 302) # Redirects to cart detail
+        self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('cart:cart_detail'))
         self.assertEqual(self.cart.items.count(), 1)
         self.assertEqual(self.cart.items.first().quantity, 2)
@@ -106,7 +106,7 @@ class CartViewTests(TestCase):
     def test_update_cart_item_view(self):
         cart_item = self.cart.add_item(self.product, 2)
         response = self.client.post(reverse('cart:update_cart_item', args=[cart_item.id]), {'quantity': 5})
-        self.assertEqual(response.status_code, 302) # Redirects to cart detail
+        self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('cart:cart_detail'))
         cart_item.refresh_from_db()
         self.assertEqual(cart_item.quantity, 5)
@@ -115,20 +115,17 @@ class CartViewTests(TestCase):
         cart_item = self.cart.add_item(self.product, 2)
         self.assertEqual(self.cart.items.count(), 1)
         response = self.client.post(reverse('cart:remove_from_cart', args=[cart_item.id]))
-        self.assertEqual(response.status_code, 302) # Redirects to cart detail
+        self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('cart:cart_detail'))
         self.assertEqual(self.cart.items.count(), 0)
 
     def test_checkout_view_empty_cart(self):
         response = self.client.get(reverse('cart:checkout'))
-        self.assertEqual(response.status_code, 302) # Redirects due to empty cart
+        self.assertEqual(response.status_code, 302) 
         self.assertRedirects(response, reverse('cart:cart_detail'))
         messages_list = list(response.wsgi_request._messages)
         self.assertEqual(len(messages_list), 1)
         self.assertEqual(str(messages_list[0]), 'Your cart is empty')
-
-    # Note: Testing the successful checkout process requires mocking external calls (notifications) or disabling them in tests.
-    # We can add a basic successful checkout test later if needed, but mocking is generally preferred for unit/integration tests.
 
 class CartSerializerTests(TestCase):
     def setUp(self):

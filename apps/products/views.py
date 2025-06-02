@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
 
-# Create your views here.
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

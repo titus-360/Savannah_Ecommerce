@@ -115,7 +115,7 @@ class CartViewSet(viewsets.ModelViewSet):
             # Create order using the create_order_from_cart method
             order = Order.create_order_from_cart(cart)
 
-            # Optionally send notifications (consider moving to a background task in production)
+            # Optionally send notifications
             try:
                 from apps.orders.views import send_order_notifications
                 send_order_notifications(order)

@@ -9,8 +9,8 @@ from apps.customers.serializers import CustomerSerializer
 User = get_user_model()
 
 class CustomerModelTests(TestCase):
-    # (Keep your existing CustomerModelTests here if any)
-    pass # Placeholder if the class is empty or doesn't exist yet
+
+    pass
 
 class CustomerAPIViewTests(APITestCase):
     def setUp(self):
@@ -85,7 +85,6 @@ class CustomerAPIViewTests(APITestCase):
     def test_delete_customer_not_allowed(self):
         url = reverse('customer-detail', args=[self.customer.pk])
         response = self.client.delete(url)
-        # DELETE is generally not enabled by default for ModelViewSet with IsAuthenticatedOrReadOnly for regular users
         # We expect 405 Method Not Allowed or 403 Forbidden
         self.assertIn(response.status_code, [status.HTTP_405_METHOD_NOT_ALLOWED, status.HTTP_403_FORBIDDEN])
         self.assertTrue(Customer.objects.filter(pk=self.customer.pk).exists()) # Ensure customer was not deleted

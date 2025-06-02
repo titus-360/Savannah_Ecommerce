@@ -4,8 +4,6 @@ from django.utils import timezone
 
 User = get_user_model()
 
-# Create your models here.
-
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer', null=True, blank=True)
     name = models.CharField(max_length=100)

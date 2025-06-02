@@ -2697,3 +2697,20 @@ INFO 2025-06-02 15:14:43,329 basehttp 185168 125444359702208 "GET /cart/count/ H
 INFO 2025-06-02 15:14:44,791 basehttp 185168 125444359702208 "GET /products/list/ HTTP/1.1" 200 36281
 INFO 2025-06-02 15:14:44,829 basehttp 185168 125444359702208 "GET /media/products/Screenshot_from_2025-05-07_19-51-20.png HTTP/1.1" 200 54305
 INFO 2025-06-02 15:14:44,849 basehttp 185168 125444368094912 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-02 22:44:17,825 autoreload 337749 135546637873280 Watching for file changes with StatReloader
+INFO 2025-06-02 22:44:39,682 autoreload 337900 131273370949056 Watching for file changes with StatReloader
+INFO 2025-06-02 22:45:34,307 autoreload 338400 129111275558336 Watching for file changes with StatReloader
+INFO 2025-06-02 22:45:34,911 views 338400 129111275558336 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 22:45:34,916 views 338400 129111275558336 Username: sandbox
+INFO 2025-06-02 22:45:34,916 views 338400 129111275558336 API Key length: 0 characters
+INFO 2025-06-02 22:45:34,917 views 338400 129111275558336 Successfully initialized Africa's Talking
+INFO 2025-06-02 22:45:51,646 autoreload 338563 140562641092736 Watching for file changes with StatReloader
+INFO 2025-06-02 22:45:51,864 views 338563 140562570147520 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 22:45:51,864 views 338563 140562570147520 Username: sandbox
+INFO 2025-06-02 22:45:51,864 views 338563 140562570147520 API Key length: 0 characters
+INFO 2025-06-02 22:45:51,865 views 338563 140562570147520 Successfully initialized Africa's Talking
+INFO 2025-06-02 22:49:54,930 autoreload 340010 140535358436800 Watching for file changes with StatReloader
+INFO 2025-06-02 22:49:55,251 views 340010 140535358436800 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 22:49:55,251 views 340010 140535358436800 Username: sandbox
+INFO 2025-06-02 22:49:55,251 views 340010 140535358436800 API Key length: 0 characters
+INFO 2025-06-02 22:49:55,251 views 340010 140535358436800 Successfully initialized Africa's Talking

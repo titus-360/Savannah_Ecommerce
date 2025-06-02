@@ -94,8 +94,6 @@ class OrderViewTests(TestCase):
         response = other_client.get(reverse('orders:order_detail', args=[self.order.id]))
         self.assertEqual(response.status_code, 404) # Should not find order belonging to another user
 
-    # Note: Testing the checkout process with successful order creation is done in the OrderModelTests.
-    # Additional tests for views related to checkout might involve testing form submissions, redirects, and error handling.
 
 class OrderSerializerTests(TestCase):
     def setUp(self):

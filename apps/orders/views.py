@@ -13,7 +13,6 @@ from .forms import OrderForm, OrderItemForm
 from apps.products.models import Product
 from decimal import Decimal
 import logging
-# from twilio.rest import Client # Import Twilio Client
 
 # Initialize logging
 logger = logging.getLogger(__name__)
@@ -34,15 +33,6 @@ if settings.configured:
         sms = africastalking.SMS
         logger.info("Successfully initialized Africa's Talking")
 
-        # No need to test sending here, let's rely on the actual send later
-        # try:
-        #     # Try to get account info to verify credentials
-        #     response = sms.send("Test message", ["+254700000000"])
-        #     logger.info("Successfully initialized Africa's Talking and verified credentials")
-        # except Exception as test_error:
-        #     logger.error(f"Failed to verify Africa's Talking credentials: {str(test_error)}")
-        #     sms = None
-        #     raise
 
     except Exception as e:
         logger.error(f"Failed to initialize Africa's Talking: {str(e)}")
@@ -53,13 +43,6 @@ else:
     sms = None
     logger.warning("Africa's Talking initialization skipped: Settings not configured.")
 
-# Initialize Twilio
-# try:
-#     twilio_client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-#     logger.info("Successfully initialized Twilio client")
-# except Exception as e:
-#     logger.error(f"Failed to initialize Twilio client: {str(e)}")
-#     twilio_client = None
 
 def send_order_notifications(order):
     """Send notifications for a new order"""
@@ -89,7 +72,6 @@ def send_order_notifications(order):
             logger.info(f"Successfully sent confirmation email to {order.user.email}")
         except Exception as e:
             logger.error(f"Failed to send customer email: {str(e)}")
-            # Don't raise the exception for email failures as they're not critical
 
         # Send email to admin
         admin_context = {
@@ -115,7 +97,7 @@ def send_order_notifications(order):
             logger.info(f"Successfully sent admin notification email to {settings.ADMIN_EMAIL}")
         except Exception as e:
             logger.error(f"Failed to send admin email: {str(e)}")
-            # Don't raise the exception for email failures as they're not critical
+
 
         # Send SMS to customer if Africa's Talking is configured
         if sms and order.phone_number:
@@ -142,14 +124,12 @@ def send_order_notifications(order):
                 logger.info(f"SMS sent successfully. Response: {response}")
             except Exception as e:
                 logger.error(f"Failed to send SMS: {str(e)}")
-                # Don't raise the exception for SMS failures as they're not critical
         else:
             logger.warning("SMS not sent: Africa's Talking not configured or no phone number provided")
 
     except Exception as e:
         logger.error(f"Failed to send notifications for order {order.order_number}: {str(e)}")
         logger.exception("Full traceback in send_order_notifications:")
-        # Don't re-raise the exception here, as we handle email and SMS failures individually
 
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer

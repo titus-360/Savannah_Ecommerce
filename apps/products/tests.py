@@ -25,8 +25,6 @@ class CategoryModelTests(TestCase):
         category = Category.objects.create(name='Books & Movies')
         self.assertEqual(category.slug, 'books-movies')
 
-    # Add tests for custom methods if any on the Category model, e.g., get_average_price
-    # Note: get_average_price is currently an action on the ViewSet, but if it were a model method, test it here.
 
     def test_get_ancestors_path(self):
         electronics = Category.objects.create(name='Electronics')

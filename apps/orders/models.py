@@ -46,7 +46,7 @@ class Order(models.Model):
         order = cls.objects.create(
             user=cart.user,
             total_price=cart.total_price,
-            shipping_address='',  # This should be filled in by the checkout form
+            shipping_address='',
             phone_number=cart.user.customer.phone if hasattr(cart.user, 'customer') and cart.user.customer.phone else ''
         )
 
