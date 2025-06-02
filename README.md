@@ -2,6 +2,13 @@
 
 A modern, scalable e-commerce platform built with Django and Django REST Framework, featuring a robust API, social authentication, and comprehensive product management.
 
+## Documentation
+
+- [Technical Architecture](docs/technical_architecture.md) - System design and components
+- [Development Guide](docs/development_guide.md) - How to work with the codebase
+- [API Documentation](docs/api_documentation.md) - API endpoints and usage
+- [Deployment Guide](docs/deployment_guide.md) - Deployment and operations
+
 ## Features
 
 - **User Management**
@@ -52,29 +59,25 @@ A modern, scalable e-commerce platform built with Django and Django REST Framewo
 - Docker and Docker Compose
 - Kubernetes (for production deployment)
 
-## Local Development Setup
+## Quick Start
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/savannah-ecommerce.git
+   git clone https://github.com/titus-360/Savannah_Ecommerce.git
    cd savannah-ecommerce
    ```
 
-2. **Create and activate virtual environment**
+2. **Set up environment**
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # Linux/Mac
    # or
    .venv\Scripts\activate  # Windows
-   ```
-
-3. **Install dependencies**
-   ```bash
    pip install -r requirements.txt
    ```
 
-4. **Set up environment variables**
-   Create a `.env` file in the project root:
+3. **Configure environment variables**
+   Create a `.env` file:
    ```
    DEBUG=True
    SECRET_KEY=your-secret-key
@@ -87,88 +90,70 @@ A modern, scalable e-commerce platform built with Django and Django REST Framewo
    AT_API_KEY=your-api-key
    ```
 
-5. **Start services with Docker Compose**
+4. **Start services**
    ```bash
    docker-compose up -d
    ```
 
-6. **Run migrations**
+5. **Run migrations**
    ```bash
    python manage.py migrate
    ```
 
-7. **Create superuser**
+6. **Create superuser**
    ```bash
    python manage.py createsuperuser
    ```
 
-8. **Run development server**
+7. **Run development server**
    ```bash
    python manage.py runserver
    ```
 
-## Docker Deployment
+## Development
 
-1. **Build the Docker image**
-   ```bash
-   docker build -t ghcr.io/yourusername/savannah-ecommerce:latest .
-   ```
+### Code Style
 
-2. **Push to container registry**
-   ```bash
-   docker push ghcr.io/yourusername/savannah-ecommerce:latest
-   ```
+- Follow PEP 8 guidelines
+- Use Black for code formatting
+- Run flake8 for linting
 
-## Kubernetes Deployment
+### Testing
 
-1. **Create namespace**
-   ```bash
-   kubectl create namespace savannah
-   ```
+```bash
+# Run tests
+pytest
 
-2. **Apply configurations**
-   ```bash
-   kubectl apply -f k8s/deployment.yaml
-   kubectl apply -f k8s/service.yaml
-   ```
+# With coverage
+pytest --cov=.
+```
 
-## API Documentation
+### API Documentation
 
-The API documentation is available at:
 - Swagger UI: `/api/docs/`
 - ReDoc: `/api/schema/redoc/`
 
-### Authentication
+## Deployment
 
-The API uses OAuth2 for authentication. To obtain a token:
+### Docker
 
 ```bash
-curl -X POST http://localhost:8000/o/token/ \
-     -d "grant_type=password" \
-     -d "username=your_username" \
-     -d "password=your_password" \
-     -d "client_id=your_client_id" \
-     -d "client_secret=your_client_secret"
+# Build image
+docker build -t ghcr.io/yourusername/savannah-ecommerce:latest .
+
+# Push to registry
+docker push ghcr.io/yourusername/savannah-ecommerce:latest
 ```
 
-### Main API Endpoints
+### Kubernetes
 
-- Products: `/api/products/`
-- Categories: `/api/categories/`
-- Orders: `/api/orders/`
-- Cart: `/api/cart/`
-- Customers: `/api/customers/`
-
-## Testing
-
-Run tests with pytest:
 ```bash
-pytest
-```
+# Create namespace
+kubectl create namespace savannah
 
-Generate coverage report:
-```bash
-pytest --cov=.
+# Apply configurations
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
 ```
 
 ## Contributing
@@ -186,3 +171,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For support, email support@savannah.com or create an issue in the repository.
+
+## Acknowledgments
+
+- Django and Django REST Framework teams
+- Africa's Talking for SMS integration
+- All contributors to the project
