@@ -2579,3 +2579,39 @@ WARNING 2025-06-01 19:19:57,036 log 14476 133830304331456 Not Found: /favicon.ic
 WARNING 2025-06-01 19:19:57,037 basehttp 14476 133830304331456 "GET /favicon.ico HTTP/1.1" 404 3941
 INFO 2025-06-01 19:19:58,713 basehttp 14476 133830304331456 "GET / HTTP/1.1" 200 15861
 INFO 2025-06-01 19:19:58,771 basehttp 14476 133830304331456 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-02 01:43:09,243 autoreload 147415 125132536395200 Watching for file changes with StatReloader
+INFO 2025-06-02 01:43:09,347 views 147415 125132536395200 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 01:43:09,347 views 147415 125132536395200 Username: sandbox
+INFO 2025-06-02 01:43:09,347 views 147415 125132536395200 API Key length: 0 characters
+INFO 2025-06-02 01:43:09,347 views 147415 125132536395200 Successfully initialized Africa's Talking
+INFO 2025-06-02 01:43:15,671 autoreload 147523 134219413616064 Watching for file changes with StatReloader
+INFO 2025-06-02 01:43:15,749 views 147523 134219413616064 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 01:43:15,749 views 147523 134219413616064 Username: sandbox
+INFO 2025-06-02 01:43:15,749 views 147523 134219413616064 API Key length: 0 characters
+INFO 2025-06-02 01:43:15,749 views 147523 134219413616064 Successfully initialized Africa's Talking
+INFO 2025-06-02 01:43:39,289 autoreload 147736 135740341740992 Watching for file changes with StatReloader
+INFO 2025-06-02 01:43:39,359 views 147736 135740341740992 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 01:43:39,359 views 147736 135740341740992 Username: sandbox
+INFO 2025-06-02 01:43:39,360 views 147736 135740341740992 API Key length: 0 characters
+INFO 2025-06-02 01:43:39,360 views 147736 135740341740992 Successfully initialized Africa's Talking
+INFO 2025-06-02 01:44:21,459 autoreload 147736 135740341740992 /home/titus-b/Desktop/savannah-ecommerce/savannah_ecommerce/settings.py changed, reloading.
+INFO 2025-06-02 01:44:22,200 autoreload 148042 130490194441664 Watching for file changes with StatReloader
+INFO 2025-06-02 01:44:22,291 views 148042 130490194441664 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 01:44:22,291 views 148042 130490194441664 Username: sandbox
+INFO 2025-06-02 01:44:22,291 views 148042 130490194441664 API Key length: 0 characters
+INFO 2025-06-02 01:44:22,291 views 148042 130490194441664 Successfully initialized Africa's Talking
+INFO 2025-06-02 01:44:24,713 autoreload 148042 130490194441664 /home/titus-b/Desktop/savannah-ecommerce/apps/cart/urls.py changed, reloading.
+INFO 2025-06-02 01:44:25,519 autoreload 148073 124480218252736 Watching for file changes with StatReloader
+INFO 2025-06-02 01:44:25,614 views 148073 124480218252736 Attempting to initialize Africa's Talking...
+INFO 2025-06-02 01:44:25,614 views 148073 124480218252736 Username: sandbox
+INFO 2025-06-02 01:44:25,614 views 148073 124480218252736 API Key length: 0 characters
+INFO 2025-06-02 01:44:25,614 views 148073 124480218252736 Successfully initialized Africa's Talking
+INFO 2025-06-02 01:44:29,355 basehttp 148073 124480124876480 "GET / HTTP/1.1" 200 15861
+INFO 2025-06-02 01:44:29,481 basehttp 148073 124480124876480 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-02 01:44:31,661 basehttp 148073 124480124876480 "GET /auth/logout/ HTTP/1.1" 302 0
+INFO 2025-06-02 01:44:31,670 basehttp 148073 124480124876480 "GET /auth/login/ HTTP/1.1" 200 11617
+INFO 2025-06-02 01:44:31,742 basehttp 148073 124480124876480 "GET /cart/count/ HTTP/1.1" 302 0
+INFO 2025-06-02 01:44:31,790 basehttp 148073 124480124876480 "GET /?next=/cart/count/ HTTP/1.1" 200 10847
+INFO 2025-06-02 01:44:34,932 basehttp 148073 124480124876480 "POST /auth/login/ HTTP/1.1" 302 0
+INFO 2025-06-02 01:44:34,961 basehttp 148073 124480124876480 "GET / HTTP/1.1" 200 15861
+INFO 2025-06-02 01:44:35,067 basehttp 148073 124480124876480 "GET /cart/count/ HTTP/1.1" 200 12
