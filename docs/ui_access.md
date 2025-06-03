@@ -80,10 +80,3 @@ If you cannot access any of the portals:
 4. Clear browser cache
 5. Try incognito mode
 6. Check server logs for errors
-
-## Support
-
-For access issues:
-- Email: support@savannah.com
-- Documentation: https://docs.savannah.com
-- GitHub Issues: https://github.com/yourusername/savannah-ecommerce/issues 
