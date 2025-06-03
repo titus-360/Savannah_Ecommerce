@@ -211,14 +211,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'murithititus510@gmail.com'  # Replace with your Gmail
-EMAIL_HOST_PASSWORD = 'fvjr soai ajcx yevs'  # Use the app password you generated
+EMAIL_HOST_USER = 'murithititus510@gmail.com'
+EMAIL_HOST_PASSWORD = 'fvjr soai ajcx yevs'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-ADMIN_EMAIL = config('ADMIN_EMAIL', default='admin@savannah.com')
+ADMIN_EMAIL = 'majidhanid25@gmail.com'
 
 # Site settings
 SITE_NAME = 'Savannah E-commerce'
-SITE_URL = 'http://localhost:8000'  # Change this in production
+SITE_URL = 'http://localhost:8000'
 
 # Twilio SMS Settings
 TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID', default='')
@@ -297,7 +297,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Social Auth settings
-# TODO: Replace these with your actual Google OAuth2 credentials from Google Cloud Console
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '960022445951-fe2frv24fi5gnqgm0lfmo2gdfrheeaqm.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile', 'openid']
@@ -309,7 +308,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.auth_allowed',
     'social_core.pipeline.social_auth.social_user',
     'social_core.pipeline.user.get_username',
-    'social_core.pipeline.social_auth.associate_by_email',  # This will try to associate by email first
+    'social_core.pipeline.social_auth.associate_by_email',  
     'social_core.pipeline.user.create_user',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
@@ -330,15 +329,15 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
 }
 
 # Social Auth settings for automatic login
-SOCIAL_AUTH_ASSOCIATE_BY_EMAIL = True  # Enable automatic association by email
-SOCIAL_AUTH_FORCE_EMAIL_VALIDATION = False  # Don't require email validation
-SOCIAL_AUTH_EMAIL_VALIDATION_FUNCTION = None  # No custom validation
-SOCIAL_AUTH_EMAIL_VALIDATION_URL = None  # No validation URL needed
+SOCIAL_AUTH_ASSOCIATE_BY_EMAIL = True  
+SOCIAL_AUTH_FORCE_EMAIL_VALIDATION = False  
+SOCIAL_AUTH_EMAIL_VALIDATION_FUNCTION = None 
+SOCIAL_AUTH_EMAIL_VALIDATION_URL = None  
 
 # Session settings
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
-SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+SESSION_COOKIE_AGE = 1209600  
+SESSION_COOKIE_SECURE = False 
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
 

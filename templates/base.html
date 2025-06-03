@@ -178,7 +178,10 @@
                     {% if user.is_authenticated %}
                         <a href="{% url 'authentication:profile' %}">Hello, {{ user.get_full_name|default:user.username }}</a>
                         <span class="mx-2">|</span>
-                        <a href="{% url 'authentication:logout' %}">Sign Out</a>
+                        <form method="post" action="{% url 'authentication:logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none; color: inherit; text-decoration: underline; cursor: pointer;">Sign Out</button>
+                        </form>
                     {% else %}
                         <a href="{% url 'authentication:login' %}">Sign In</a>
                         <span class="mx-2">|</span>

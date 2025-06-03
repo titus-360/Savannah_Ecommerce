@@ -7,10 +7,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'dummy-secret-key-for-ci'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = []
@@ -24,7 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Include your apps here that require migrations or are tested
+    # Include your apps that require migrations or are tested
     'apps.authentication',
     'apps.customers',
     'apps.products',
