@@ -314,24 +314,6 @@ Response includes pagination metadata:
     "results": [...]
 }
 ```
-
-## Webhooks
-
-The API supports webhooks for real-time notifications. Available events:
-- `order.created`
-- `order.updated`
-- `order.cancelled`
-- `payment.succeeded`
-- `payment.failed`
-
-To subscribe to webhooks, send a POST request to `/api/webhooks/`:
-```json
-{
-    "url": "https://your-domain.com/webhook",
-    "events": ["order.created", "payment.succeeded"]
-}
-```
-
 ## Versioning
 
 The API is versioned through the URL path. The current version is v1:
