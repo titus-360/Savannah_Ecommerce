@@ -2714,3 +2714,66 @@ INFO 2025-06-02 22:49:55,251 views 340010 140535358436800 Attempting to initiali
 INFO 2025-06-02 22:49:55,251 views 340010 140535358436800 Username: sandbox
 INFO 2025-06-02 22:49:55,251 views 340010 140535358436800 API Key length: 0 characters
 INFO 2025-06-02 22:49:55,251 views 340010 140535358436800 Successfully initialized Africa's Talking
+INFO 2025-06-03 10:04:08,420 autoreload 405296 130256882005440 Watching for file changes with StatReloader
+INFO 2025-06-03 10:04:54,386 autoreload 405296 130256882005440 /home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/mptt/managers.py changed, reloading.
+INFO 2025-06-03 10:04:55,505 autoreload 409287 127958483625408 Watching for file changes with StatReloader
+INFO 2025-06-03 10:04:55,819 views 409287 127958483625408 Attempting to initialize Africa's Talking...
+INFO 2025-06-03 10:04:55,819 views 409287 127958483625408 Username: sandbox
+INFO 2025-06-03 10:04:55,819 views 409287 127958483625408 API Key length: 0 characters
+INFO 2025-06-03 10:04:55,819 views 409287 127958483625408 Successfully initialized Africa's Talking
+INFO 2025-06-03 10:05:03,081 views 409475 125853198628288 Attempting to initialize Africa's Talking...
+INFO 2025-06-03 10:05:03,081 views 409475 125853198628288 Username: sandbox
+INFO 2025-06-03 10:05:03,081 views 409475 125853198628288 API Key length: 0 characters
+INFO 2025-06-03 10:05:03,081 views 409475 125853198628288 Successfully initialized Africa's Talking
+ERROR 2025-06-03 10:05:17,390 log 409287 127958382540480 Internal Server Error: /api/docs/
+Traceback (most recent call last):
+  File "/home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/drf_yasg/renderers.py", line 79, in render
+    return render_to_string(self.template, renderer_context, renderer_context['request'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/titus-b/Desktop/savannah-ecommerce/.venv/lib/python3.12/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: drf-yasg/swagger-ui.html
+ERROR 2025-06-03 10:05:17,392 basehttp 409287 127958382540480 "GET /api/docs/ HTTP/1.1" 500 114685
+INFO 2025-06-03 10:05:54,242 autoreload 409915 123247193138624 Watching for file changes with StatReloader
+INFO 2025-06-03 10:05:54,410 views 409915 123247193138624 Attempting to initialize Africa's Talking...
+INFO 2025-06-03 10:05:54,410 views 409915 123247193138624 Username: sandbox
+INFO 2025-06-03 10:05:54,410 views 409915 123247193138624 API Key length: 0 characters
+INFO 2025-06-03 10:05:54,410 views 409915 123247193138624 Successfully initialized Africa's Talking
+INFO 2025-06-03 10:06:11,071 basehttp 409915 123247024666304 "GET / HTTP/1.1" 200 10847
+WARNING 2025-06-03 10:06:11,198 basehttp 409915 123247024666304 "GET /static/images/hero-image.jpg HTTP/1.1" 404 1990
+INFO 2025-06-03 10:06:11,494 basehttp 409915 123247016273600 "GET /cart/count/ HTTP/1.1" 302 0
+INFO 2025-06-03 10:06:11,521 basehttp 409915 123247016273600 "GET /?next=/cart/count/ HTTP/1.1" 200 10847
+INFO 2025-06-03 10:06:13,566 basehttp 409915 123247016273600 "GET /auth/login/ HTTP/1.1" 200 11617
+INFO 2025-06-03 10:06:13,678 basehttp 409915 123247016273600 "GET /cart/count/ HTTP/1.1" 302 0
+INFO 2025-06-03 10:06:13,692 basehttp 409915 123247016273600 "GET /?next=/cart/count/ HTTP/1.1" 200 10847
+INFO 2025-06-03 10:06:17,589 basehttp 409915 123247016273600 "POST /auth/login/ HTTP/1.1" 200 11774
+INFO 2025-06-03 10:06:17,697 basehttp 409915 123247016273600 "GET /cart/count/ HTTP/1.1" 302 0
+INFO 2025-06-03 10:06:17,710 basehttp 409915 123247016273600 "GET /?next=/cart/count/ HTTP/1.1" 200 10847
+INFO 2025-06-03 10:06:21,566 basehttp 409915 123247016273600 "GET /auth/login/google-oauth2/ HTTP/1.1" 302 0
+INFO 2025-06-03 10:06:45,771 basehttp 409915 123247016273600 "GET /auth/complete/google-oauth2/?state=iy7p3LLmJm44jL76dTFv26FgMGRYwYsW&code=4%2F0AUJR-x5NXR-9buBUm-VskqTdcQWinBgPQDRU5Kdf3BqP0qUufyXZwayF869rd7ty36snXA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&hd=agencify.insure&prompt=consent HTTP/1.1" 302 0
+INFO 2025-06-03 10:06:45,804 basehttp 409915 123247016273600 "GET / HTTP/1.1" 200 15803
+INFO 2025-06-03 10:06:46,318 basehttp 409915 123247016273600 "GET /cart/count/ HTTP/1.1" 200 12
+INFO 2025-06-03 10:09:05,432 autoreload 409915 123247193138624 /home/titus-b/Desktop/savannah-ecommerce/savannah_ecommerce/urls.py changed, reloading.
+INFO 2025-06-03 10:09:06,243 autoreload 411233 137721848448448 Watching for file changes with StatReloader
+INFO 2025-06-03 10:09:06,418 views 411233 137721848448448 Attempting to initialize Africa's Talking...
+INFO 2025-06-03 10:09:06,419 views 411233 137721848448448 Username: sandbox
+INFO 2025-06-03 10:09:06,419 views 411233 137721848448448 API Key length: 0 characters
+INFO 2025-06-03 10:09:06,419 views 411233 137721848448448 Successfully initialized Africa's Talking
+INFO 2025-06-03 10:09:36,202 basehttp 411233 137721683113664 "GET /api/docs/ HTTP/1.1" 200 4560
+INFO 2025-06-03 10:09:36,586 basehttp 411233 137721683113664 "GET /api/schema/ HTTP/1.1" 200 98913
+INFO 2025-06-03 10:10:54,317 basehttp 411233 137721683113664 "GET /api/categories/ HTTP/1.1" 200 17472

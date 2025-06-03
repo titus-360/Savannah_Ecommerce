@@ -189,3 +189,26 @@ TWILIO_PHONE_NUMBER = 'dummy_phone'
 SITE_NAME = 'CI Test Site'
 SITE_URL = 'http://localhost/'
 ADMIN_EMAIL = 'ci_admin@example.com'
+
+# Spectacular settings for API documentation
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Savannah E-commerce API (CI)',
+    'DESCRIPTION': 'API for managing customers, products, categories, and orders',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+        'displayOperationId': True,
+        'defaultModelsExpandDepth': 2,
+        'defaultModelExpandDepth': 2,
+    },
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SCHEMA_PATH_PREFIX': '/api/',
+    'SECURITY': [{'Bearer': []}],
+    'TAGS': [
+        {'name': 'categories', 'description': 'Category operations'},
+        {'name': 'products', 'description': 'Product operations'},
+        {'name': 'customers', 'description': 'Customer operations'},
+        {'name': 'orders', 'description': 'Order operations'},
+    ],
+}
