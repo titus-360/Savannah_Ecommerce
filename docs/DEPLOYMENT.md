@@ -280,9 +280,3 @@ kubectl get ingress -n savannah
 3. Test recovery procedures regularly
 4. Maintain backup of configuration files
 5. Keep deployment manifests in version control
-
-## Support
-
-For deployment support:
-- Email: devops@savannah.com
-- GitHub Issues: https://github.com/yourusername/savannah-ecommerce/issues 
