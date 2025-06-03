@@ -44,10 +44,12 @@ This document contains screenshots of the various user interfaces in the Savanna
 ## API Documentation
 
 ### Swagger UI
-[Add screenshot of the Swagger UI showing API endpoints and documentation]
+![Swagger UI](screenshots/swaggerscreenshot.png)
+*Interactive API documentation using Swagger UI, accessible at `/api/docs/`*
 
 ### ReDoc
-[Add screenshot of the ReDoc interface showing API documentation]
+![ReDoc](screenshots/redocscreenshot.png)
+*Alternative API documentation using ReDoc, accessible at `/api/redoc/`*
 
 ## Authentication
 
